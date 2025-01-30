@@ -1,0 +1,153 @@
+@import './reset.css';
+@import './colors.css';
+
+@font-face {
+  font-family: "Departure Mono";
+  src:
+    local("Departure Mono"),
+    url("/fonts/DepartureMono-Regular.otf") format("opentype"),
+    url("/fonts/DepartureMono-Regular.woff") format("woff"),
+    url("/fonts/DepartureMono-Regular.woff2") format("woff2");
+}
+
+:root {
+  --font-size-base: 16.5px;
+
+  --font-size-25: calc(var(--font-size-base) * 0.25);
+  --font-size-50: calc(var(--font-size-base) * 0.5);
+  --font-size-100: calc(var(--font-size-base) * 1);
+  --font-size-150: calc(var(--font-size-base) * 1.25);
+  --font-size-200: calc(var(--font-size-base) * 1.5);
+  --font-size-300: calc(var(--font-size-base) * 2);
+  --font-size-400: calc(var(--font-size-base) * 3);
+
+  --spacing-50: 0.5rem;
+  --spacing-100: 1rem;
+  --spacing-200: 2rem;
+  --spacing-400: 4rem;
+
+  --content-width: 60rem;
+  --perforations-width: 60px;
+  --perforations-border: 2px;
+}
+
+body {
+  background: var(--color-surface);
+  color: var(--color-text);
+
+  font-family: "Departure Mono";
+  font-size: var(--font-size-100);
+  text-rendering: optimizeLegibility;
+  font-synthesis: none;
+}
+
+h1 {
+  font-size: var(--font-size-300);
+  color: var(--color-header);
+  margin: var(--spacing-200) 0 var(--spacing-100);
+  letter-spacing: -2px;
+}
+
+h2 {
+  font-size: var(--font-size-200);
+  color: var(--color-header);
+  margin: var(--spacing-200) 0 var(--spacing-100);
+  letter-spacing: -1px;
+}
+
+h3 {
+  font-size: var(--font-size-150);
+  color: var(--color-header);
+  margin: var(--spacing-200) 0 var(--spacing-100);
+}
+
+h1::before,
+h2::before,
+h3::before,
+h4::before,
+h5::before,
+h6::before {
+  content: '█';
+  margin-right: var(--spacing-50);
+}
+
+header {
+  color: var(--color-subtext);
+}
+
+main {
+  margin: 0 auto;
+  padding: var(--spacing-100) var(--spacing-200) var(--spacing-400);
+  max-width: var(--content-width);
+  background-color: var(--color-background);
+  border-left: var(--perforations-border) solid var(--color-surface);
+  border-right: var(--perforations-border) solid var(--color-surface);
+  position: relative;
+}
+
+@media screen and (min-width: 70em) {
+  main {
+    margin: var(--spacing-100) auto;
+    filter: drop-shadow(-5px 5px 10px var(--color-shadow));
+  }
+
+  main::before {
+    content: ' ';
+    background-color: var(--color-background);
+    position: absolute;
+    width: var(--perforations-width);
+    height: 100%;
+    top: 0;
+    left: calc(var(--perforations-width) * -1 - var(--perforations-border));
+    mask: url(/perforations.svg) luminance repeat-y;
+  }
+
+  main::after {
+    content: ' ';
+    background-color: var(--color-background);
+    position: absolute;
+    width: var(--perforations-width);
+    height: 100%;
+    top: 0;
+    right: calc(var(--perforations-width) * -1 - var(--perforations-border));
+    mask: url(/perforations.svg) luminance repeat-y;
+  }
+}
+
+nav {
+  /* TODO: NOT A BADGE BUT BUSINESS CARD */
+  margin-top: 10em;
+  margin-left: 5em;
+  padding: 2em;
+  background-color: var(--color-nav-background);
+  color: var(--color-nav-text);
+  width: 15em;
+  height: 20em;
+  border-radius: 1em;
+  filter: drop-shadow(-5px 5px 10px var(--color-shadow));
+}
+
+nav .clip {
+  width: 25%;
+  margin: 0 auto 1em;
+  border: 2px solid var(--color-background);
+  border-radius: 1em;
+}
+
+.badge {
+  padding: var(--spacing-50);
+  color: var(--color-background);
+  background: var(--color-text);
+  text-transform: uppercase;
+}
+
+.subheader {
+  display: flex;
+  gap: var(--spacing-100);
+  align-items: center;
+}
+
+.container {
+  display: flex;
+  gap: 5em;
+}
