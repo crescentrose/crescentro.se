@@ -38,6 +38,11 @@
 
   --color-highlight: var(--ctp-latte-overlay2);
 
-  --color-nav-background: var(--ctp-latte-text);
-  --color-nav-text: var(--ctp-latte-base);
+  --color-business-card-background: var(--ctp-latte-mantle);
+  --color-business-card-header: var(--ctp-latte-text);
+  --color-business-card-text: var(--ctp-latte-subtext1);
+  --color-business-card-link: var(--ctp-latte-subtext0);
+  --color-business-card-link-hover: var(--ctp-latte-text);
+  --color-business-card-subtext: var(--ctp-latte-rosewater);
+  --color-business-card-divider: var(--ctp-latte-rosewater);
 }

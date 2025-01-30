@@ -10,11 +10,29 @@
     url("/fonts/DepartureMono-Regular.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "Libre Baskerville";
+  src:
+    local("Libre Baskerville"),
+    url("/fonts/LibreBaskerville-Bold.ttf") format("truetype");
+
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Libre Baskerville";
+  src:
+    local("Libre Baskerville"),
+    url("/fonts/LibreBaskerville-Italic.ttf") format("truetype");
+
+  font-weight: normal;
+  font-style: oblique;
+}
+
 :root {
   --font-size-base: 16.5px;
 
-  --font-size-25: calc(var(--font-size-base) * 0.25);
-  --font-size-50: calc(var(--font-size-base) * 0.5);
+  --font-size-50: 11px;
   --font-size-100: calc(var(--font-size-base) * 1);
   --font-size-150: calc(var(--font-size-base) * 1.25);
   --font-size-200: calc(var(--font-size-base) * 1.5);
@@ -26,7 +44,9 @@
   --spacing-200: 2rem;
   --spacing-400: 4rem;
 
-  --content-width: 60rem;
+  --content-width: 241mm;
+  --card-width: 460px;
+  --card-height: 270px;
   --perforations-width: 60px;
   --perforations-border: 2px;
 }
@@ -78,7 +98,7 @@ header {
 main {
   margin: 0 auto;
   padding: var(--spacing-100) var(--spacing-200) var(--spacing-400);
-  max-width: var(--content-width);
+  width: var(--content-width);
   background-color: var(--color-background);
   border-left: var(--perforations-border) solid var(--color-surface);
   border-right: var(--perforations-border) solid var(--color-surface);
@@ -88,7 +108,6 @@ main {
 @media screen and (min-width: 70em) {
   main {
     margin: var(--spacing-100) auto;
-    filter: drop-shadow(-5px 5px 10px var(--color-shadow));
   }
 
   main::before {
@@ -114,26 +133,6 @@ main {
   }
 }
 
-nav {
-  /* TODO: NOT A BADGE BUT BUSINESS CARD */
-  margin-top: 10em;
-  margin-left: 5em;
-  padding: 2em;
-  background-color: var(--color-nav-background);
-  color: var(--color-nav-text);
-  width: 15em;
-  height: 20em;
-  border-radius: 1em;
-  filter: drop-shadow(-5px 5px 10px var(--color-shadow));
-}
-
-nav .clip {
-  width: 25%;
-  margin: 0 auto 1em;
-  border: 2px solid var(--color-background);
-  border-radius: 1em;
-}
-
 .badge {
   padding: var(--spacing-50);
   color: var(--color-background);
@@ -150,4 +149,85 @@ nav .clip {
 .container {
   display: flex;
   gap: 5em;
+}
+
+.business-card {
+  margin-top: 10em;
+  margin-left: 5em;
+  padding: var(--spacing-200);
+  background-color: var(--color-business-card-background);
+  color: var(--color-business-card-text);
+  width: var(--card-width);
+  height: var(--card-height);
+  box-shadow:
+    -5px 10px 25px var(--color-shadow),
+    -2px 5px 5px var(--color-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.business-card a {
+  color: var(--color-business-card-link);
+}
+
+.business-card a:hover {
+  color: var(--color-business-card-link-hover);
+}
+
+.business-card__container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.business-card__container--main {
+  flex-grow: 1;
+  flex-direction: column;
+  margin: var(--spacing-100) 0;
+}
+
+.business-card__container--spread {
+  justify-content: space-between;
+}
+
+.business-card__company {
+  font-family: "Libre Baskerville";
+  font-variant-caps: small-caps;
+  font-weight: bold;
+  color: var(--color-business-card-subtext);
+  margin: 0 var(--spacing-100);
+}
+
+hr.business-card__divider {
+  flex-grow: 1;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid var(--color-business-card-divider);
+}
+
+.business-card__name {
+  font-size: var(--font-size-150);
+  color: var(--color-business-card-header);
+}
+
+.business-card__motto {
+  font-family: "Libre Baskerville";
+  font-size: var(--font-size-50);
+  margin: 0 var(--spacing-50);
+  font-style: oblique;
+  color: var(--color-business-card-subtext);
+}
+
+.business-card__left {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: stretch;
+}
+
+.business-card__right {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+  justify-content: end;
 }
