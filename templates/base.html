@@ -9,37 +9,14 @@
 </head>
 
 <body>
+  <center>
+    <!-- the idea with this was to make the printout come out of a pixelated dot-matrix printer,
+      with buttons on the printer to switch between pages. however I don't think I can get
+      this to work on smaller screens so I scrapped it before investing time into making it
+      work !-->
+    <img src="/developer-art.png" />
+  </center>
   <div class="container">
-    <nav class="business-card">
-      <div class="business-card__container">
-        <hr class="business-card__divider">
-        <span class="business-card__company">Basil Industries</span>
-        <hr class="business-card__divider">
-      </div>
-
-      <div class="business-card__container business-card__container--main">
-        <div class="business-card__name">Art Vandelay</div>
-        <div class="business-card__title">Importer / Exporter</div>
-      </div>
-
-      <div>
-        <div class="business-card__container business-card__container--spread">
-          <div class="business-card__left">
-            <a href="/">Homepage</a>
-            hi&commat;crescentro.se
-          </div>
-          <div class="business-card__right">
-            <a href="#">Link</a>
-            <a href="#">Link Two</a>
-          </div>
-        </div>
-      </div>
-      <div class="business-card__container">
-        <hr class="business-card__divider">
-        <span class="business-card__motto">&ldquo; Meow! &rdquo;</span>
-        <hr class="business-card__divider">
-      </div>
-    </nav>
     <main>
       {% block content %} {% endblock %}
     </main>

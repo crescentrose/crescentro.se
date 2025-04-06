@@ -66,6 +66,7 @@ h1 {
   color: var(--color-header);
   margin: var(--spacing-200) 0 var(--spacing-100);
   letter-spacing: -2px;
+  line-height: 2;
 }
 
 h2 {
@@ -73,6 +74,7 @@ h2 {
   color: var(--color-header);
   margin: var(--spacing-200) 0 var(--spacing-100);
   letter-spacing: -1px;
+  line-height: 2;
 }
 
 h3 {
@@ -91,6 +93,22 @@ h6::before {
   margin-right: var(--spacing-50);
 }
 
+a:link {
+  color: var(--color-link);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--color-link);
+  text-decoration: underline wavy 1px;
+  text-decoration-skip-ink: all;
+}
+
+a:visited,
+a:active {
+  color: var(--color-link-visited);
+}
+
 header {
   color: var(--color-subtext);
 }
@@ -103,6 +121,7 @@ main {
   border-left: var(--perforations-border) solid var(--color-surface);
   border-right: var(--perforations-border) solid var(--color-surface);
   position: relative;
+  line-height: 1.5;
 }
 
 @media screen and (min-width: 70em) {
@@ -144,90 +163,4 @@ main {
   display: flex;
   gap: var(--spacing-100);
   align-items: center;
-}
-
-.container {
-  display: flex;
-  gap: 5em;
-}
-
-.business-card {
-  margin-top: 10em;
-  margin-left: 5em;
-  padding: var(--spacing-200);
-  background-color: var(--color-business-card-background);
-  color: var(--color-business-card-text);
-  width: var(--card-width);
-  height: var(--card-height);
-  box-shadow:
-    -5px 10px 25px var(--color-shadow),
-    -2px 5px 5px var(--color-shadow);
-  display: flex;
-  flex-direction: column;
-}
-
-.business-card a {
-  color: var(--color-business-card-link);
-}
-
-.business-card a:hover {
-  color: var(--color-business-card-link-hover);
-}
-
-.business-card__container {
-  display: flex;
-  width: 100%;
-  align-items: center;
-}
-
-.business-card__container--main {
-  flex-grow: 1;
-  flex-direction: column;
-  margin: var(--spacing-100) 0;
-}
-
-.business-card__container--spread {
-  justify-content: space-between;
-}
-
-.business-card__company {
-  font-family: "Libre Baskerville";
-  font-variant-caps: small-caps;
-  font-weight: bold;
-  color: var(--color-business-card-subtext);
-  margin: 0 var(--spacing-100);
-}
-
-hr.business-card__divider {
-  flex-grow: 1;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid var(--color-business-card-divider);
-}
-
-.business-card__name {
-  font-size: var(--font-size-150);
-  color: var(--color-business-card-header);
-}
-
-.business-card__motto {
-  font-family: "Libre Baskerville";
-  font-size: var(--font-size-50);
-  margin: 0 var(--spacing-50);
-  font-style: oblique;
-  color: var(--color-business-card-subtext);
-}
-
-.business-card__left {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  align-items: stretch;
-}
-
-.business-card__right {
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-  justify-content: end;
 }
