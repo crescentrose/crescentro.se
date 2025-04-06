@@ -44,15 +44,11 @@
   --spacing-200: 2rem;
   --spacing-400: 4rem;
 
-  --content-width: 241mm;
-  --card-width: 460px;
-  --card-height: 270px;
-  --perforations-width: 60px;
-  --perforations-border: 2px;
+  --content-width: 50em;
 }
 
 body {
-  background: var(--color-surface);
+  background: var(--color-background);
   color: var(--color-text);
 
   font-family: "Departure Mono";
@@ -83,13 +79,17 @@ h3 {
   margin: var(--spacing-200) 0 var(--spacing-100);
 }
 
-h1::before,
+h1::before {
+  content: '█';
+  margin-right: var(--spacing-100);
+}
+
 h2::before,
 h3::before,
 h4::before,
 h5::before,
 h6::before {
-  content: '█';
+  content: '▒';
   margin-right: var(--spacing-50);
 }
 
@@ -100,13 +100,13 @@ a:link {
 
 a:hover {
   color: var(--color-link);
-  text-decoration: underline wavy 1px;
+  text-decoration: underline solid var(--color-link) 3px;
   text-decoration-skip-ink: all;
 }
 
-a:visited,
-a:active {
+a:is(:visited, :visited:hover, :active) {
   color: var(--color-link-visited);
+  text-decoration-color: var(--color-link-visited);
 }
 
 header {
@@ -115,41 +115,39 @@ header {
 
 main {
   margin: 0 auto;
-  padding: var(--spacing-100) var(--spacing-200) var(--spacing-400);
+  padding: var(--spacing-200);
   width: var(--content-width);
-  background-color: var(--color-background);
-  border-left: var(--perforations-border) solid var(--color-surface);
-  border-right: var(--perforations-border) solid var(--color-surface);
   position: relative;
   line-height: 1.5;
 }
 
-@media screen and (min-width: 70em) {
-  main {
-    margin: var(--spacing-100) auto;
-  }
+nav {
+  display: flex;
+  width: var(--content-width);
+  margin: 0 auto;
+  padding: var(--spacing-200);
+  gap: var(--spacing-200);
+  align-items: center;
+}
 
-  main::before {
-    content: ' ';
-    background-color: var(--color-background);
-    position: absolute;
-    width: var(--perforations-width);
-    height: 100%;
-    top: 0;
-    left: calc(var(--perforations-width) * -1 - var(--perforations-border));
-    mask: url(/perforations.svg) luminance repeat-y;
-  }
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-100);
+}
 
-  main::after {
-    content: ' ';
-    background-color: var(--color-background);
-    position: absolute;
-    width: var(--perforations-width);
-    height: 100%;
-    top: 0;
-    right: calc(var(--perforations-width) * -1 - var(--perforations-border));
-    mask: url(/perforations.svg) luminance repeat-y;
-  }
+nav .spacer {
+  flex-grow: 1;
+}
+
+nav a:is(:link, :hover, :active, :visited, :visited:hover) {
+  color: var(--color-nav-link);
+  text-decoration-color: var(--color-nav-link);
+}
+
+.brand--link {
+  cursor: pointer;
+  user-select: none;
 }
 
 .badge {

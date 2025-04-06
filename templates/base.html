@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" theme="catppuccin-latte">
+<html lang="en" theme="catppuccin-mocha">
 
 <head>
   <meta charset="utf-8">
@@ -9,22 +9,22 @@
 </head>
 
 <body>
-  <center>
-    <!-- the idea with this was to make the printout come out of a pixelated dot-matrix printer,
-      with buttons on the printer to switch between pages. however I don't think I can get
-      this to work on smaller screens so I scrapped it before investing time into making it
-      work !-->
-    <img src="/developer-art.png" />
-  </center>
-  <div class="container">
-    <main>
-      {% block content %} {% endblock %}
-    </main>
-  </div>
-
-  <footer>
-    <p>peepee poopoo</p>
-  </footer>
+  <nav>
+    <a class="brand" href="{{ get_url(path='/') }}">
+      <img src="/icon@2x.png"
+        class="logo"
+        role="img"
+        aria-label="logo - a little silhouette of a black cat"
+      />
+      <div class="brand--link">crescentro.se</div>
+    </a>
+    <div class="spacer"></div>
+    <a href="#">Foo</a>
+    <a href="{{ get_url(path='@/blog/_index.md') }}">Posts</a>
+  </nav>
+  <main>
+    {% block content %} {% endblock %}
+  </main>
 </body>
 
 </html>
