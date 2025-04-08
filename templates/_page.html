@@ -1,0 +1,24 @@
+{% extends "_base.html" %}
+
+{% block body %}
+<div class="container">
+  <nav>
+    <a class="brand" href="{{ get_url(path='/') }}">
+      <img
+          src="/icon@2x.png"
+          class="logo"
+          alt="logo - a little silhouette of a black cat"
+          srcset="/icon@1x.png 20w, /icon@2x.png 40w"
+          sizes="(min-width: 50em) 40px, 20px"
+        />
+      <div class="brand--link desktop-only">crescentrose</div>
+    </a>
+    <div class="spacer"></div>
+    <a href="{{ get_url(path='/') }}" class="mobile-only">Home</a>
+    <a href="{{ get_url(path='@/blog/_index.md') }}">Posts</a>
+  </nav>
+  <main>
+    {% block content %} {% endblock %}
+  </main>
+</div>
+{% endblock body %}

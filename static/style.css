@@ -1,6 +1,7 @@
 @import './reset.css';
 @import './colors.css';
 
+/* Definitions */
 @font-face {
   font-family: "Departure Mono";
   src:
@@ -8,25 +9,6 @@
     url("/fonts/DepartureMono-Regular.otf") format("opentype"),
     url("/fonts/DepartureMono-Regular.woff") format("woff"),
     url("/fonts/DepartureMono-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Libre Baskerville";
-  src:
-    local("Libre Baskerville"),
-    url("/fonts/LibreBaskerville-Bold.ttf") format("truetype");
-
-  font-weight: bold;
-}
-
-@font-face {
-  font-family: "Libre Baskerville";
-  src:
-    local("Libre Baskerville"),
-    url("/fonts/LibreBaskerville-Italic.ttf") format("truetype");
-
-  font-weight: normal;
-  font-style: oblique;
 }
 
 :root {
@@ -47,16 +29,29 @@
   --content-width: 50em;
 }
 
+/* Layout */
 body {
   background: var(--color-background);
   color: var(--color-text);
-
   font-family: "Departure Mono";
   font-size: var(--font-size-100);
   text-rendering: optimizeLegibility;
   font-synthesis: none;
 }
 
+.container {
+  width: min(100vw, var(--content-width));
+  margin: 0 auto;
+  line-height: 1.5;
+  padding: var(--spacing-100);
+  container: main / inline-size;
+}
+
+main {
+  margin: 0 auto;
+}
+
+/* Typography */
 h1 {
   font-size: var(--font-size-300);
   color: var(--color-header);
@@ -93,63 +88,80 @@ h6::before {
   margin-right: var(--spacing-50);
 }
 
+a,
 a:link {
   color: var(--color-link);
-  text-decoration: none;
+  background-image: linear-gradient(to top, var(--color-link-highlight) 50%, transparent 0);
+  background-position: top;
+  background-size: 200% 200%;
+  text-decoration: underline solid var(--color-link-highlight) 3px;
+  transition: background-position 0.2s, color 0.2s;
 }
 
-a:hover {
-  color: var(--color-link);
-  text-decoration: underline solid var(--color-link) 3px;
-  text-decoration-skip-ink: all;
-}
-
-a:is(:visited, :visited:hover, :active) {
-  color: var(--color-link-visited);
-  text-decoration-color: var(--color-link-visited);
+a:is(:hover, :visited:hover) {
+  color: var(--color-background);
+  background-position: bottom;
+  text-decoration-skip-ink: none;
 }
 
 header {
   color: var(--color-subtext);
 }
 
-main {
-  margin: 0 auto;
-  padding: var(--spacing-200);
-  width: var(--content-width);
-  position: relative;
-  line-height: 1.5;
-}
-
-nav {
+.subheader {
   display: flex;
-  width: var(--content-width);
-  margin: 0 auto;
-  padding: var(--spacing-200);
-  gap: var(--spacing-200);
+  gap: var(--spacing-100);
   align-items: center;
 }
 
-.brand {
+
+/* Components */
+
+/* Navigation bar */
+nav {
+  display: flex;
+  margin: 0 auto;
+  gap: var(--spacing-100);
+  align-items: center;
+}
+
+nav .brand--link {
+  cursor: pointer;
+  user-select: none;
+  color: var(--color-link);
+}
+
+nav a.brand {
+  text-decoration: none;
+  background: transparent;
+}
+
+nav .brand {
   display: flex;
   align-items: center;
   gap: var(--spacing-100);
 }
 
-nav .spacer {
-  flex-grow: 1;
+/* Front page */
+.frontpage .brand {
+  gap: var(--spacing-200);
 }
 
-nav a:is(:link, :hover, :active, :visited, :visited:hover) {
-  color: var(--color-nav-link);
-  text-decoration-color: var(--color-nav-link);
+.frontpage .brand--link {
+  display: block;
+  font-size: var(--font-size-300);
+  cursor: auto;
 }
 
-.brand--link {
-  cursor: pointer;
-  user-select: none;
+.frontpage .brand--tagline {
+  font-size: var(--font-size-50);
 }
 
+.frontpage main {
+  margin: var(--spacing-200) 0;
+}
+
+/* Post category */
 .badge {
   padding: var(--spacing-50);
   color: var(--color-background);
@@ -157,8 +169,48 @@ nav a:is(:link, :hover, :active, :visited, :visited:hover) {
   text-transform: uppercase;
 }
 
-.subheader {
-  display: flex;
-  gap: var(--spacing-100);
-  align-items: center;
+/* Utilities */
+.spacer {
+  flex-grow: 1;
+}
+
+.desktop-only {
+  display: none;
+}
+
+.mobile-only {
+  display: block;
+}
+
+/* Responsiveness */
+@media screen and (min-width: 50em) {
+  .container {
+    padding: var(--spacing-200);
+  }
+
+  nav {
+    gap: var(--spacing-200);
+  }
+
+  .desktop-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* View transitions */
+@view-transition {
+  navigation: auto;
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion) {
+
+  a,
+  a:link {
+    transition: none !important;
+  }
 }

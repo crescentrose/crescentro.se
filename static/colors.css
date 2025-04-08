@@ -66,8 +66,8 @@
   --color-subtext: var(--ctp-latte-subtext0);
   --color-highlight: var(--ctp-latte-overlay2);
 
-  --color-link: var(--ctp-latte-flamingo);
-  --color-link-visited: var(--ctp-latte-mauve);
+  --color-link: var(--ctp-latte-text);
+  --color-link-highlight: var(--ctp-latte-flamingo);
   --color-nav-link: var(--ctp-latte-text);
 }
 
@@ -82,8 +82,8 @@
     --color-subtext: var(--ctp-mocha-subtext0);
     --color-highlight: var(--ctp-mocha-overlay2);
 
-    --color-link: var(--ctp-mocha-flamingo);
-    --color-link-visited: var(--ctp-mocha-mauve);
+    --color-link: var(--ctp-mocha-text);
+    --color-link-highlight: var(--ctp-mocha-flamingo);
     --color-nav-link: var(--ctp-mocha-text);
   }
 }

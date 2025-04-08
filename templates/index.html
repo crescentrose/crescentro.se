@@ -1,7 +1,35 @@
-{% extends "base.html" %}
+{% extends "_base.html" %}
+{% block body %}
+<div class="container frontpage">
+  <nav>
+    <div class="brand">
+      <img
+          src="/icon@4x.png"
+          class="logo"
+          alt="logo - a little silhouette of a black cat"
+          srcset="/icon@3x.png 60w, /icon@4x.png 80w"
+          sizes="(min-width: 50em) 80px, 60px"
+        />
+      <div>
+        <div class="brand--link">crescentrose</div>
+        <div class="brand--tagline">inventor, innovator, visionary</div>
+      </div>
+    </div>
+  </nav>
 
-{% block content %}
-<h1>Hello, world!</h1>
+  <main>
+    <p>Welcome to my humble website... something something...</p>
+    <p>write some more here...</p>
 
-<a href="{{ get_url(path='@/blog/_index.md') }}">Posts</a>
-{% endblock content %}
+    <h2>Recent musings</h2>
+
+    <p>put posts here...</p>
+
+    <h2>Other places</h2>
+
+    <p>put links here...</p>
+    <p>maybe some cool social embeds</p>
+
+  </main>
+</div>
+{% endblock body %}
