@@ -21,6 +21,7 @@
   --font-size-300: calc(var(--font-size-base) * 2);
   --font-size-400: calc(var(--font-size-base) * 3);
 
+  --spacing-25: 0.25rem;
   --spacing-50: 0.5rem;
   --spacing-100: 1rem;
   --spacing-200: 2rem;
@@ -55,7 +56,7 @@ main {
 h1 {
   font-size: var(--font-size-300);
   color: var(--color-header);
-  margin: var(--spacing-200) 0 var(--spacing-100);
+  margin: var(--spacing-200) 0 var(--spacing-50);
   letter-spacing: -2px;
   line-height: 2;
 }
@@ -63,7 +64,7 @@ h1 {
 h2 {
   font-size: var(--font-size-200);
   color: var(--color-header);
-  margin: var(--spacing-200) 0 var(--spacing-100);
+  margin: var(--spacing-100) 0 var(--spacing-50);
   letter-spacing: -1px;
   line-height: 2;
 }
@@ -71,7 +72,7 @@ h2 {
 h3 {
   font-size: var(--font-size-150);
   color: var(--color-header);
-  margin: var(--spacing-200) 0 var(--spacing-100);
+  margin: var(--spacing-100) 0 var(--spacing-50);
 }
 
 h1::before {
@@ -106,12 +107,14 @@ a:is(:hover, :visited:hover) {
 
 header {
   color: var(--color-subtext);
+  margin-bottom: var(--spacing-200);
 }
 
 .subheader {
   display: flex;
   gap: var(--spacing-100);
   align-items: center;
+  font-size: var(--font-size-50);
 }
 
 
@@ -163,7 +166,7 @@ nav .brand {
 
 /* Post category */
 .badge {
-  padding: var(--spacing-50);
+  padding: var(--spacing-25);
   color: var(--color-background);
   background: var(--color-text);
   text-transform: uppercase;
