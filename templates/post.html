@@ -1,5 +1,27 @@
 {% extends "_page.html" %}
 
+{% block meta %}
+<meta property="og:title" content="{{ page.title }}" />
+<meta property="og:type" content="article" />
+{% if page.author is defined %}
+<meta property="article:author" content="{{ page.author }}" />
+{% else %}
+<meta property="article:author" content="{{ config.author }}" />
+{% endif %}
+
+{% if page.colocated_path is defined %}
+{% set image_url = page.colocated_path ~ "preview.png" %}
+<meta property="og:image" content="{{ get_url(path=image_url) }}" />
+{% else %}
+<meta property="og:image" content="/preview.png" />
+{% endif %}
+
+<meta property="og:image:type" content="image/png" />
+{% if page.extra.og_image_alt is defined %}
+<meta property="og:image:alt" content="{{ page.extra.og_image_alt }}" />
+{% endif %}
+{% endblock meta %}
+
 {% block content %}
 <article>
   <header>

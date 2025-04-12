@@ -13,6 +13,12 @@ exclude_paginated_pages_in_sitemap = "all"
 # The default author for pages
 author = "crescentrose"
 
+# A list of glob patterns specifying asset files to ignore when the content
+# directory is processed. Defaults to none, which means that all asset files are
+# copied over to the `public` directory.
+# Example:
+#     ignored_content = ["*.{graphml,xlsx}", "temp.*", "**/build_folder"]
+ignored_content = []
 
 [markdown]
 # Whether to do syntax highlighting
@@ -40,3 +46,4 @@ bottom_footnotes = true
 
 [extra]
 # Put all your custom variables here
+title = "crescentro.se"

@@ -1,0 +1,52 @@
+#!/usr/bin/env zsh
+
+title=""
+desc=""
+template="./preview.template.png"
+output=""
+show=false
+positional=()
+
+local usage=(
+  "mkpreview [-h|--help]"
+  "mkpreview [-t|--title=<title>] [-d|--desc=<desc>] [-e|--template=<template>] [-o|--out=<outfile>] [-s|--show]"
+)
+opterr() { echo >&2 "mkpreview: Unknown option '$1'" }
+
+while (( $# )); do
+  case $1 in
+    -h|--help)          printf "%s\n" $usage && exit ;;
+    -t|--title)         shift; title=$1 ;;
+    -t=*|--title=*)     title="${1#*=}" ;;
+    -d|--desc)          shift; desc=$1 ;;
+    -d=*|--desc=*)      desc="${1#*=}" ;;
+    -e|--template)      shift; template=$1 ;;
+    -e=*|--template=*)  template="${1#*=}" ;;
+    -o|--out)           shift; output=$1 ;;
+    -o=*|--out=*)       output="${1#*=}" ;;
+    -s|--show)          show=true ;;
+    -*)                 opterr $1 && return 2 ;;
+    *)                  positional+=("${@[@]}"); break  ;;
+  esac
+  shift
+done
+
+if [[ -z "$title" ]] || [[ -z "$desc" ]] || [[ -z "$output" ]]; then
+  echo >&2 "expected --title, --desc, and --out options to be set"
+  printf "%s\n" $usage
+  exit 1
+fi
+
+magick \
+  -size 750x -fill "#cdd6f4" -background transparent \
+  -pointsize 44 -font Departure-Mono-Regular \
+  caption:"█ $title" \
+  -size 750x -fill "#cdd6f4" -background transparent \
+  -pointsize 33 -font Departure-Mono-Regular \
+  caption:"\n$desc" -append \
+  $template \
+  +swap -size 1200x675 -gravity center -geometry +170+0 -composite -quality 90 $output
+
+if $show; then
+  kitty +kitten icat $output
+fi
