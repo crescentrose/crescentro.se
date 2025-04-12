@@ -42,11 +42,6 @@ body {
   font-family: var(--font-family-primary);
   font-size: var(--font-size-100);
   font-synthesis: none;
-
-  -webkit-font-smoothing: none;
-  -moz-osx-font-smoothing: grayscale;
-  transform: translateZ(0px);
-  font-smooth: none;
 }
 
 .container {
@@ -54,7 +49,6 @@ body {
   margin: 0 auto;
   line-height: 1.5;
   padding: var(--spacing-100);
-  container: main / inline-size;
 }
 
 main {
@@ -114,14 +108,18 @@ a:link {
   background-image: linear-gradient(to top, var(--color-link-highlight) 50%, transparent 0);
   background-position: top;
   background-size: 200% 200%;
-  text-decoration: underline solid var(--color-link) 3px;
-  /* transition: background-position 0.2s, color 0.2s; */
+
+  /* spelling this out for Safari */
+  text-decoration-thickness: 3px;
+  text-decoration-color: var(--color-link);
+  text-decoration-style: solid;
+  text-decoration-line: underline;
 }
 
 a:is(:hover, :visited:hover) {
   color: var(--color-background);
   background-position: bottom;
-  text-decoration: underline solid var(--color-link-highlight) 3px;
+  text-decoration-color: var(--color-link-highlight);
   text-decoration-skip-ink: none;
 }
 
@@ -182,7 +180,7 @@ nav .brand {
 nav a.brand:is(:link, :hover, :active, :visited, :visited:hover) {
   color: var(--color-link);
   background: transparent;
-  text-decoration: none;
+  text-decoration-line: none;
 }
 
 /* Front page */
@@ -350,9 +348,17 @@ small {
 
 /* Accessibility */
 @media (prefers-reduced-motion) {
-
-  a,
-  a:link {
+  a {
     transition: none !important;
+  }
+}
+
+@media not (prefers-reduced-motion) {
+  .brand--logo {
+    view-transition-name: logo;
+  }
+
+  .brand--link {
+    view-transition-name: name;
   }
 }

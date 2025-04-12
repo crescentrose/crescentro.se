@@ -1,3 +1,4 @@
+/* Color schemes */
 :root {
   /* Cattpuccin - Latte (light) */
   --ctp-latte-base: #eff1f5;
@@ -56,38 +57,21 @@
   --ctp-mocha-yellow: #f9e2af;
 }
 
-/* Default style - light mode */
+/* Color system */
 :root {
-  --color-surface: var(--ctp-latte-mantle);
-  --color-background: var(--ctp-latte-base);
+  color-scheme: light dark;
 
-  --color-text: var(--ctp-latte-subtext1);
-  --color-highlight: var(--ctp-latte-crust);
-  --color-heading: var(--ctp-latte-text);
-  --color-subtext: var(--ctp-latte-subtext0);
-  --color-subsubtext: var(--ctp-latte-overlay1);
+  --color-surface: light-dark(var(--ctp-latte-mantle), var(--ctp-mocha-mantle));
+  --color-background: light-dark(var(--ctp-latte-base), var(--ctp-mocha-base));
 
-  --color-link: var(--ctp-latte-text);
-  --color-link-highlight: var(--ctp-latte-rosewater);
-  --color-nav-link: var(--ctp-latte-text);
-  --color-mark: var(--ctp-latte-subtext1);
-}
+  --color-text: light-dark(var(--ctp-latte-subtext1), var(--ctp-mocha-subtext1));
+  --color-highlight: light-dark(var(--ctp-latte-crust), var(--ctp-mocha-crust));
+  --color-heading: light-dark(var(--ctp-latte-text), var(--ctp-mocha-text));
+  --color-subtext: light-dark(var(--ctp-latte-subtext0), var(--ctp-mocha-subtext0));
+  --color-subsubtext: light-dark(var(--ctp-latte-overlay1), var(--ctp-mocha-overlay1));
 
-/* Alternate style - dark mode */
-@media screen and (prefers-color-scheme: dark) {
-  :root {
-    --color-surface: var(--ctp-mocha-mantle);
-    --color-background: var(--ctp-mocha-base);
-
-    --color-text: var(--ctp-mocha-subtext1);
-    --color-highlight: var(--ctp-mocha-crust);
-    --color-heading: var(--ctp-mocha-text);
-    --color-subtext: var(--ctp-mocha-subtext0);
-    --color-subsubtext: var(--ctp-mocha-overlay1);
-
-    --color-link: var(--ctp-mocha-text);
-    --color-link-highlight: var(--ctp-mocha-rosewater);
-    --color-nav-link: var(--ctp-mocha-text);
-    --color-mark: var(--ctp-mocha-subtext1);
-  }
+  --color-link: light-dark(var(--ctp-latte-text), var(--ctp-mocha-text));
+  --color-link-highlight: light-dark(var(--ctp-latte-rosewater), var(--ctp-mocha-rosewater));
+  --color-nav-link: light-dark(var(--ctp-latte-text), var(--ctp-mocha-text));
+  --color-mark: light-dark(var(--ctp-latte-subtext1), var(--ctp-mocha-subtext1));
 }

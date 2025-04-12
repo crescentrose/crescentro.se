@@ -5,7 +5,7 @@ base_url = "https://crescentro.se"
 compile_sass = false
 
 # When set to "true", a feed is automatically generated.
-generate_feeds = false
+generate_feeds = true
 
 # When set to "all", paginated pages are not a part of the sitemap, default is "none"
 exclude_paginated_pages_in_sitemap = "all"
@@ -23,7 +23,7 @@ highlight_code = true
 highlight_theme = "css"
 highlight_themes_css = [
   { theme = "ayu-dark", filename = "syntax-theme-dark.css" },
-  { theme = "ayu-light", filename = "syntax-theme-light.css" },
+  { theme = "inspired-github", filename = "syntax-theme-light.css" },
 ]
 
 # Whether smart punctuation is enabled (changing quotes, dashes, dots in their typographic form)

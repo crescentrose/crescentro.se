@@ -11,7 +11,7 @@
     {% set article_class = "regular" %}
     {% endif %}
 
-    <li class="{{ article_class }}"><a href="{{ post.permalink | safe }}">{{ post.title }}</a>
+    <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a>
   {% endfor %}
 </ul>
 

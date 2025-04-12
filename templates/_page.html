@@ -1,12 +1,13 @@
 {% extends "_base.html" %}
+{% import "macros.html" as macros %}
 
 {% block body %}
 <div class="container">
   <nav>
-    <a class="brand" href="{{ get_url(path='/') }}">
+    <a class="brand" href="/">
       <img
           src="/icon@2x.png"
-          class="logo"
+          class="brand--logo"
           alt="logo - a little silhouette of a black cat"
           srcset="/icon@1x.png 20w, /icon@2x.png 40w"
           sizes="(min-width: 50em) 40px, 20px"
@@ -14,9 +15,9 @@
       <div class="brand--link desktop-only">crescentrose</div>
     </a>
     <div class="spacer"></div>
-    <a href="{{ get_url(path='/') }}" class="mobile-only">Home</a>
-    <a href="{{ get_url(path='@/now/index.md') }}">Now</a>
-    <a href="{{ get_url(path='@/blog/_index.md') }}">Blog</a>
+    <a href="/" class="mobile-only">Home</a>
+    <a href="{{ macros::rel_url(path='@/now/index.md') }}">Now</a>
+    <a href="{{ macros::rel_url(path='@/blog/_index.md') }}">Posts</a>
   </nav>
   <main>
     {% block content %} {% endblock %}
