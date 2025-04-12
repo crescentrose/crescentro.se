@@ -23,8 +23,12 @@
 
     {% block meta %}
     <meta property="og:title" content="{{ config.title }}" />
+    {% endblock %}
+
+    {% block preview_image %}
     <meta property="og:image" content="/preview.png" />
     <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content="Website preview. Pixel art of a dark vaguely cat-shaped creature with two shining square eyes, next to text. Heading: crescentrose. Subheading: the void meows also." />
     {% endblock %}
   </head>
 

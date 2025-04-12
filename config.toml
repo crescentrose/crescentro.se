@@ -1,6 +1,10 @@
 # The URL the site will be built for
 base_url = "https://crescentro.se"
 
+# The site title and description; used in feeds by default.
+title = "crescentro.se"
+description = "the void meows also"
+
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = false
 

@@ -1,5 +1,9 @@
 {% extends "_page.html" %}
 
+{% block title %}
+{{ page.title }} // crescentro.se
+{% endblock %}
+
 {% block meta %}
 <meta property="og:title" content="{{ page.title }}" />
 <meta property="og:type" content="article" />
@@ -8,19 +12,26 @@
 {% else %}
 <meta property="article:author" content="{{ config.author }}" />
 {% endif %}
-
-{% if page.colocated_path is defined %}
-{% set image_url = page.colocated_path ~ "preview.png" %}
-<meta property="og:image" content="{{ get_url(path=image_url) }}" />
-{% else %}
-<meta property="og:image" content="/preview.png" />
-{% endif %}
-
-<meta property="og:image:type" content="image/png" />
-{% if page.extra.og_image_alt is defined %}
-<meta property="og:image:alt" content="{{ page.extra.og_image_alt }}" />
-{% endif %}
 {% endblock meta %}
+
+{% block preview_image %}
+
+{% if page.colocated_path %}
+{% set image_path = page.colocated_path ~ "preview.png" %}
+{% else %}
+{% set image_path = "/preview.png" %}
+{% endif %}
+
+{% set image_meta = get_image_metadata(path=image_path, allow_missing=true) %}
+{% if image_meta.width is defined %}
+<meta property="og:image" content="{{ get_url(path=image_path) }}" />
+<meta property="og:image:width" content="{{ image_meta.width }}" />
+<meta property="og:image:height" content="{{ image_meta.height }}" />
+<meta property="og:image:type" content="{{ image_meta.mime }}" />
+<meta property="og:image:alt" content="Preview of an article. Heading: {{ page.title }}" />
+{% endif %}
+{% endblock preview_image %}
+
 
 {% block content %}
 <article>
