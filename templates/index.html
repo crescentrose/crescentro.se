@@ -23,9 +23,17 @@
 
     <h2>Recent musings</h2>
 
-    <p>put posts here...</p>
+    <ul>
+    {% set posts = get_section(path="blog/_index.md") %}
+    {% set recents = posts.pages | slice(end=5) %}
+    {% for post in recents %}
+    <li>
+      <a href="{{ post.permalink | safe }}">{{ post.title }}</a>
+    </li>
+    {% endfor %}
+    </ul>
 
-    <a href="{{ get_url(path='@/blog/_index.md') }}">Older →</a>
+    <a href="{{ get_url(path='@/blog/_index.md') }}">All →</a>
     <h2>Other places</h2>
 
     <p>put links here...</p>

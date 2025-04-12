@@ -12,8 +12,12 @@
 }
 
 :root {
-  --font-size-base: 16.5px;
+  --font-family-primary: "Departure Mono";
+  --font-family-heading: "Departure Mono";
+  --font-family-code: "Departure Mono";
+  /* daring today, aren't we */
 
+  --font-size-base: 16.5px;
   --font-size-50: 11px;
   --font-size-100: calc(var(--font-size-base) * 1);
   --font-size-150: calc(var(--font-size-base) * 1.25);
@@ -28,13 +32,14 @@
   --spacing-400: 4rem;
 
   --content-width: 50em;
+  --footnote-border-length: 10em;
 }
 
 /* Layout */
 body {
   background: var(--color-background);
   color: var(--color-text);
-  font-family: "Departure Mono";
+  font-family: var(--font-family-primary);
   font-size: var(--font-size-100);
   text-rendering: optimizeLegibility;
   font-synthesis: none;
@@ -53,9 +58,20 @@ main {
 }
 
 /* Typography */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  color: var(--color-heading);
+  margin: var(--spacing-100) 0 var(--spacing-50);
+}
+
 h1 {
   font-size: var(--font-size-300);
-  color: var(--color-header);
   margin: var(--spacing-200) 0 var(--spacing-50);
   letter-spacing: -2px;
   line-height: 2;
@@ -63,16 +79,13 @@ h1 {
 
 h2 {
   font-size: var(--font-size-200);
-  color: var(--color-header);
-  margin: var(--spacing-100) 0 var(--spacing-50);
   letter-spacing: -1px;
   line-height: 2;
 }
 
 h3 {
   font-size: var(--font-size-150);
-  color: var(--color-header);
-  margin: var(--spacing-100) 0 var(--spacing-50);
+  color: var(--color-heading);
 }
 
 h1::before {
@@ -95,13 +108,14 @@ a:link {
   background-image: linear-gradient(to top, var(--color-link-highlight) 50%, transparent 0);
   background-position: top;
   background-size: 200% 200%;
-  text-decoration: underline solid var(--color-link-highlight) 3px;
-  transition: background-position 0.2s, color 0.2s;
+  text-decoration: underline solid var(--color-link) 3px;
+  /* transition: background-position 0.2s, color 0.2s; */
 }
 
 a:is(:hover, :visited:hover) {
   color: var(--color-background);
   background-position: bottom;
+  text-decoration: underline solid var(--color-link-highlight) 3px;
   text-decoration-skip-ink: none;
 }
 
@@ -117,6 +131,15 @@ header {
   font-size: var(--font-size-50);
 }
 
+.subheader a {
+  text-decoration-thickness: 1px;
+}
+
+ul {
+  padding: 0;
+  list-style: "★" inside;
+  margin: var(--spacing-50) 0;
+}
 
 /* Components */
 
@@ -128,21 +151,16 @@ nav {
   align-items: center;
 }
 
-nav .brand--link {
-  cursor: pointer;
-  user-select: none;
-  color: var(--color-link);
-}
-
-nav a.brand {
-  text-decoration: none;
-  background: transparent;
-}
-
 nav .brand {
   display: flex;
   align-items: center;
   gap: var(--spacing-100);
+}
+
+nav a.brand:is(:link, :hover, :active, :visited, :visited:hover) {
+  color: var(--color-link);
+  background: transparent;
+  text-decoration: none;
 }
 
 /* Front page */
@@ -170,6 +188,106 @@ nav .brand {
   color: var(--color-background);
   background: var(--color-text);
   text-transform: uppercase;
+}
+
+/* Code blocks */
+pre.z-code {
+  margin: var(--spacing-100) 0;
+  padding: var(--spacing-100);
+  overflow: auto;
+  background: var(--color-surface);
+}
+
+pre code {
+  font-family: var(--font-family-code);
+  padding: 0;
+}
+
+pre[data-linenos] {
+  padding: var(--spacing-100) 0;
+}
+
+pre table td {
+  padding: 0;
+}
+
+pre table td:nth-of-type(1) {
+  text-align: center;
+  vertical-align: top;
+  user-select: none;
+  color: var(--color-subtext);
+  padding: 0 var(--spacing-25);
+}
+
+pre mark {
+  display: block;
+  background-color: var(--color-highlight);
+  color: inherit;
+}
+
+pre table td:nth-of-type(1) mark {
+  /* Line numbers */
+  color: var(--color-subsubtext);
+  background-color: transparent;
+}
+
+pre table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+code {
+  padding: var(--spacing-25) var(--spacing-50);
+  background-color: var(--color-surface);
+}
+
+/* Footnotes */
+.footnotes {
+  margin: var(--spacing-200) 0;
+  padding: var(--spacing-50) 0;
+  color: var(--color-subtext);
+  font-size: var(--font-size-50);
+  position: relative;
+}
+
+.footnotes::before {
+  /* Add a partial border to the footnote section */
+  content: "";
+  background: var(--color-subtext);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--footnote-border-length);
+  height: 1px;
+}
+
+.footnotes li {
+  margin: var(--spacing-50) 0;
+}
+
+.footnotes a,
+.footnote-reference a {
+  text-decoration-thickness: 1px;
+  font-size: var(--font-size-50);
+}
+
+/* Highlights */
+mark {
+  /* reset */
+  background-color: transparent;
+  color: inherit;
+}
+
+mark.primary {
+  background-color: var(--color-mark);
+  color: var(--color-background);
+}
+
+mark.quiet {
+  color: var(--color-subsubtext);
+  font-size: var(--font-size-50);
+  letter-spacing: -1px;
+  margin: 0 -5px;
 }
 
 /* Utilities */

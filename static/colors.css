@@ -58,32 +58,36 @@
 
 /* Default style - light mode */
 :root {
-  --color-surface: var(--ctp-latte-surface0);
+  --color-surface: var(--ctp-latte-mantle);
   --color-background: var(--ctp-latte-base);
 
   --color-text: var(--ctp-latte-subtext1);
-  --color-header: var(--ctp-latte-text);
+  --color-highlight: var(--ctp-latte-crust);
+  --color-heading: var(--ctp-latte-text);
   --color-subtext: var(--ctp-latte-subtext0);
-  --color-highlight: var(--ctp-latte-overlay2);
+  --color-subsubtext: var(--ctp-latte-overlay1);
 
   --color-link: var(--ctp-latte-text);
-  --color-link-highlight: var(--ctp-latte-flamingo);
+  --color-link-highlight: var(--ctp-latte-rosewater);
   --color-nav-link: var(--ctp-latte-text);
+  --color-mark: var(--ctp-latte-subtext1);
 }
 
-/* Alternate style - dark  mode */
+/* Alternate style - dark mode */
 @media screen and (prefers-color-scheme: dark) {
   :root {
-    --color-surface: var(--ctp-mocha-surface0);
+    --color-surface: var(--ctp-mocha-mantle);
     --color-background: var(--ctp-mocha-base);
 
     --color-text: var(--ctp-mocha-subtext1);
-    --color-header: var(--ctp-mocha-text);
+    --color-highlight: var(--ctp-mocha-crust);
+    --color-heading: var(--ctp-mocha-text);
     --color-subtext: var(--ctp-mocha-subtext0);
-    --color-highlight: var(--ctp-mocha-overlay2);
+    --color-subsubtext: var(--ctp-mocha-overlay1);
 
     --color-link: var(--ctp-mocha-text);
-    --color-link-highlight: var(--ctp-mocha-flamingo);
+    --color-link-highlight: var(--ctp-mocha-rosewater);
     --color-nav-link: var(--ctp-mocha-text);
+    --color-mark: var(--ctp-mocha-subtext1);
   }
 }
