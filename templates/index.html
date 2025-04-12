@@ -18,26 +18,53 @@
   </nav>
 
   <main>
-    <p>Welcome to my humble website... something something...</p>
-    <p>write some more here...</p>
+    <section>
+      <p>Welcome to my humble website... something something...</p>
+      <p>write some more here...</p>
+    </section>
 
-    <h2>Recent musings</h2>
+    <section>
+      <h2>Recent musings</h2>
+      <ul>
+      {% set posts = get_section(path="blog/_index.md") %}
+      {% set recents = posts.pages | slice(end=10) %}
+      {% for post in recents %}
+        {% if post.extra.featured %}
+        {% set article_class = "featured" %}
+        {% else %}
+        {% set article_class = "regular" %}
+        {% endif %}
 
-    <ul>
-    {% set posts = get_section(path="blog/_index.md") %}
-    {% set recents = posts.pages | slice(end=5) %}
-    {% for post in recents %}
-    <li>
-      <a href="{{ post.permalink | safe }}">{{ post.title }}</a>
-    </li>
-    {% endfor %}
-    </ul>
+        <li class="{{ article_class }}"><a href="{{ post.permalink | safe }}">{{ post.title }}</a>
+      {% endfor %}
+      </ul>
 
-    <a href="{{ get_url(path='@/blog/_index.md') }}">All →</a>
-    <h2>Other places</h2>
+      <a href="{{ get_url(path='@/blog/_index.md') }}">All →</a>
+    </section>
 
-    <p>put links here...</p>
-    <p>maybe some cool social embeds</p>
+    <section>
+      <h2>Other places</h2>
+
+      <p>put links here...</p>
+      <p>maybe some cool social embeds</p>
+      <ul>
+        <li>github</li>
+        <li>rym</li>
+        <li>last.fm</li>
+        <li>bsky</li>
+        <li>not sure if i want to add others...</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Other stuff</h2>
+      <ul>
+        <li>photos?</li>
+        <li>cooking?</li>
+        <li>plants?</li>
+        <li>junk?</li>
+      </ul>
+    </section>
 
   </main>
 </div>

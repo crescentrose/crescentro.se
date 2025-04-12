@@ -1,6 +1,9 @@
 +++
 title = "My first post"
 date = 2025-01-27
+
+[extra]
+featured = true
 +++
 
 ## The standard Lorem Ipsum passage, used since the 1500s

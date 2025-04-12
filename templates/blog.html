@@ -4,12 +4,14 @@
 <h1>{{ section.title }}</h1>
 
 <ul>
-  {% for page in section.pages %}
-  <li>
-    <a href="{{ page.permalink | safe }}">
-      {{ page.title }}
-    </a>
-  </li>
+  {% for post in section.pages %}
+    {% if post.extra.featured %}
+    {% set article_class = "featured" %}
+    {% else %}
+    {% set article_class = "regular" %}
+    {% endif %}
+
+    <li class="{{ article_class }}"><a href="{{ post.permalink | safe }}">{{ post.title }}</a>
   {% endfor %}
 </ul>
 

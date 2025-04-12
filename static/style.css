@@ -41,8 +41,12 @@ body {
   color: var(--color-text);
   font-family: var(--font-family-primary);
   font-size: var(--font-size-100);
-  text-rendering: optimizeLegibility;
   font-synthesis: none;
+
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: grayscale;
+  transform: translateZ(0px);
+  font-smooth: none;
 }
 
 .container {
@@ -99,6 +103,8 @@ h4::before,
 h5::before,
 h6::before {
   content: '▒';
+  /* enforce pixel perfect font size */
+  font-size: 22px;
   margin-right: var(--spacing-50);
 }
 
@@ -137,8 +143,24 @@ header {
 
 ul {
   padding: 0;
-  list-style: "★" inside;
   margin: var(--spacing-50) 0;
+  list-style: none;
+  /* list-style: "♦" inside; */
+}
+
+/* no way to style ::marker, so here we are... */
+ul li::before {
+  content: "♦";
+  margin-right: var(--spacing-50);
+
+}
+
+ul li.featured::before {
+  content: "★";
+}
+
+ul li.regular::before {
+  content: "✧";
 }
 
 /* Components */
@@ -283,11 +305,9 @@ mark.primary {
   color: var(--color-background);
 }
 
-mark.quiet {
+small {
   color: var(--color-subsubtext);
   font-size: var(--font-size-50);
-  letter-spacing: -1px;
-  margin: 0 -5px;
 }
 
 /* Utilities */
@@ -302,6 +322,7 @@ mark.quiet {
 .mobile-only {
   display: block;
 }
+
 
 /* Responsiveness */
 @media screen and (min-width: 50em) {
