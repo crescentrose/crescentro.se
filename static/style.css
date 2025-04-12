@@ -191,7 +191,6 @@ nav a.brand:is(:link, :hover, :active, :visited, :visited:hover) {
 .frontpage .brand--link {
   display: block;
   font-size: var(--font-size-300);
-  cursor: auto;
 }
 
 .frontpage .brand--tagline {
