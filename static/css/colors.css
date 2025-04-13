@@ -88,4 +88,7 @@
   /* Background color for highlighted text. Multiple variants */
   --color-mark: light-dark(var(--ctp-latte-subtext1), var(--ctp-mocha-subtext1));
   --color-mark-bright: light-dark(var(--ctp-latte-rosewater), var(--ctp-mocha-rosewater));
+  --color-mark-leaf: light-dark(var(--ctp-latte-green), var(--ctp-mocha-green));
+  --color-mark-cool: light-dark(var(--ctp-latte-sapphire), var(--ctp-mocha-sapphire));
+  --color-mark-hot: light-dark(var(--ctp-latte-maroon), var(--ctp-mocha-maroon));
 }

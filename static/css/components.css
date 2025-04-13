@@ -1,0 +1,253 @@
+@layer details {
+  details summary {
+    list-style: none;
+  }
+
+  details summary::before {
+    content: "►";
+    margin-right: var(--spacing-50);
+    display: inline-block;
+  }
+
+  details[open] summary::before {
+    transform: rotate(90deg);
+  }
+}
+
+@layer nav {
+  nav {
+    display: flex;
+    margin: 0 auto;
+    gap: var(--spacing-100);
+    align-items: center;
+  }
+
+  nav .brand {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-100);
+  }
+
+  @media screen and (min-width: 50em) {
+    nav {
+      gap: var(--spacing-200);
+    }
+  }
+}
+
+@layer frontpage {
+
+  /* Front page */
+  .frontpage .brand {
+    gap: var(--spacing-200);
+  }
+
+  .frontpage .brand--link {
+    display: block;
+    font-size: var(--font-size-300);
+  }
+
+  .frontpage .brand--tagline {
+    font-size: var(--font-size-50);
+  }
+
+  .frontpage main {
+    margin: var(--spacing-200) 0;
+  }
+}
+
+@layer badge {
+
+  /* Post category */
+  .badge {
+    padding: var(--spacing-25);
+    color: var(--color-background);
+    background: var(--color-mark);
+    text-transform: uppercase;
+  }
+
+  .badge.bright {
+    background: var(--color-mark-bright);
+  }
+
+  .badge.leaf {
+    background: var(--color-mark-leaf);
+  }
+
+  .badge.cool {
+    background: var(--color-mark-cool);
+  }
+
+  .badge.hot {
+    background: var(--color-mark-hot);
+  }
+}
+
+@layer footnotes {
+
+  /* Footnotes */
+  .footnotes {
+    margin: var(--spacing-200) 0;
+    padding: var(--spacing-50) 0;
+    color: var(--color-subtext);
+    font-size: var(--font-size-50);
+    position: relative;
+  }
+
+  .footnotes::before {
+    /* Add a partial border to the footnote section */
+    content: "";
+    background: var(--color-subtext);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: var(--footnote-border-length);
+    height: 1px;
+  }
+
+  .footnotes li {
+    margin: var(--spacing-50) 0;
+  }
+
+  .footnotes a,
+  .footnote-reference a {
+    text-decoration-thickness: 1px;
+    font-size: var(--font-size-50);
+  }
+}
+
+@layer highlights {
+
+  /* Highlights */
+  mark {
+    background-color: var(--color-mark);
+    color: var(--color-background);
+  }
+
+  mark.bright {
+    background-color: var(--color-mark-bright);
+    color: var(--color-background);
+  }
+
+  small {
+    color: var(--color-subsubtext);
+    font-size: var(--font-size-50);
+  }
+
+}
+
+@layer code {
+
+  /* Code blocks */
+  pre.z-code {
+    margin: var(--spacing-100) 0;
+    padding: var(--spacing-100);
+    overflow: auto;
+    background: var(--color-surface);
+  }
+
+  pre code {
+    font-family: var(--font-family-code);
+    padding: 0;
+  }
+
+  pre[data-linenos] {
+    padding: var(--spacing-100) 0;
+  }
+
+  pre table td {
+    padding: 0;
+  }
+
+  pre table td:nth-of-type(1) {
+    text-align: center;
+    vertical-align: top;
+    user-select: none;
+    color: var(--color-subtext);
+    padding: 0 var(--spacing-25);
+  }
+
+  pre mark {
+    display: block;
+    background-color: var(--color-highlight);
+    color: inherit;
+  }
+
+  pre table td:nth-of-type(1) mark {
+    /* Line numbers */
+    color: var(--color-subsubtext);
+    background-color: transparent;
+  }
+
+  pre table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  code {
+    padding: var(--spacing-25) var(--spacing-50);
+    background-color: var(--color-surface);
+  }
+}
+
+
+@layer quotes {
+
+  /* Quotes and admonitions */
+  blockquote {
+    padding-left: var(--spacing-150);
+    margin: var(--spacing-100) 0;
+    color: var(--color-subtext);
+    position: relative;
+    background: var(--color-surface);
+  }
+
+  blockquote p::before {
+    content: ">";
+    position: absolute;
+    left: 0;
+  }
+
+}
+
+@layer card {
+
+  /* Card */
+  .card {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+      "photo name"
+      "photo note"
+      "photo email";
+
+    max-width: var(--card-width);
+    margin: var(--spacing-100) 0;
+    border: 1px solid var(--color-text);
+    padding: var(--spacing-100);
+    column-gap: var(--spacing-50);
+    justify-content: center;
+  }
+
+  .card .u-photo {
+    grid-area: photo;
+    margin: auto auto;
+  }
+
+  .card .p-name {
+    grid-area: name;
+  }
+
+  .card .p-note {
+    grid-area: note;
+    font-size: var(--font-size-50);
+    align-self: start;
+  }
+
+  .card .card-email {
+    grid-area: email;
+    font-size: var(--font-size-50);
+    margin: auto 0;
+  }
+}

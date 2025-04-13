@@ -1,10 +1,9 @@
 {% extends "_base.html" %}
-{% import "macros.html" as macros %}
 
 {% block body %}
 <div class="container">
   <nav>
-    <a class="brand" href="/">
+    <a class="brand link--reset" href="/">
       <img
           src="/icon@2x.png"
           class="brand--logo"
@@ -12,12 +11,9 @@
           srcset="/icon@1x.png 20w, /icon@2x.png 40w"
           sizes="(min-width: 50em) 40px, 20px"
         />
-      <div class="brand--link desktop-only">{{ config.title }}</div>
+      <div class="brand--link">{{ config.title }}</div>
     </a>
     <div class="spacer"></div>
-    <a href="/" class="mobile-only">Home</a>
-    <a href="{{ macros::rel_url(path='@/now/index.md') }}">Now</a>
-    <a href="{{ macros::rel_url(path='@/posts/_index.md') }}">Posts</a>
   </nav>
   <main>
     {% block content %} {% endblock %}

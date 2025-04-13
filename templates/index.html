@@ -20,10 +20,8 @@
 
   <main>
     <section>
-      <p>Welcome to my humble website... something something...</p>
-      <p>write some more here...</p>
+      <p>I write code sometimes.</p>
     </section>
-
     <section>
       <h2>Recent musings</h2>
       <ul>
@@ -44,41 +42,41 @@
     </section>
 
     <section>
-      <h2>Other places</h2>
-
-      <p>put links here...</p>
-      <p>maybe some cool social embeds</p>
+      <h2>Other stuff</h2>
       <ul>
-        <li><a href="https://github.com/crescentrose" rel="me">@crescentrose on GitHub</a></li>
-        <li>rym</li>
-        <li>last.fm</li>
-        <li>bsky</li>
-        <li>steam</li>
-        <li>discord?</li>
-        <li>not sure if i want to add others...</li>
+        <li><a href="{{ macros::rel_url(path='@/photos/_index.md') }}">Photos →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/cooking/_index.md') }}">Cooking →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/plants/_index.md') }}">Plants →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/junk/_index.md') }}">Junk →</a></li>
       </ul>
     </section>
 
     <section>
-      <h2>Other stuff</h2>
+      <h2>Find me elsewhere</h2>
+
       <ul>
-        <li>photos?</li>
-        <li>cooking?</li>
-        <li>plants?</li>
-        <li>junk?</li>
+        <li><a href="https://github.com/crescentrose" rel="me">@crescentrose on GitHub</a></li>
+        <li><a href="https://bsky.app/profile/crescentro.se" rel="me">@crescentro.se on Bluesky</a></li>
+        <li><a href="https://www.last.fm/user/crescentr0se">crescentr0se on last.fm</a></li>
+        <li><a href="https://rateyourmusic.com/~crescentrose">crescentrose on RYM</a></li>
+        <li><a href="https://steamcommunity.com/id/staple-stable">viora on Steam</a></li>
+        <li><a href="https://discord.com/users/95105078385446912">viora on Discord</a></li>
       </ul>
     </section>
 
     <section>
       <details class="h-card">
         <summary>Card</summary>
-        <img src="/icon@3x.png" class="u-photo" alt="profile picture - a little silhouette of a black cat" />
-        <a class="u-url p-name" rel="me" href="https://crescentro.se">crescentrose</a>
-        <div class="p-note">chaotic neutral</div>
-        <div><a class="u-email" rel="me" href="mailto:hi@crescentro.se">hi@crescentro.se</a></div>
+        <div class="card">
+          <img src="/icon@3x.png" class="u-photo" alt="profile picture - a little silhouette of a black cat" />
+          <a class="u-url p-name" rel="me" href="https://crescentro.se">crescentrose</a>
+          <div class="p-note">chaotic neutral</div>
+          <div class="card-email">
+            <a class="u-email" rel="me" href="mailto:hi@crescentro.se">hi@crescentro.se</a>
+          </div>
+        </div>
       </details>
     </section>
-
   </main>
 </div>
 {% endblock body %}

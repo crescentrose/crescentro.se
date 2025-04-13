@@ -1,4 +1,5 @@
 {% extends "_page.html" %}
+{% import "macros.html" as macros %}
 
 {% block title %}
 {{ page.title }} // crescentro.se
@@ -40,11 +41,18 @@
     </h1>
 
     <div class="subheader">
-      {% if page.taxonomies["category"] is defined %}
-      <span class="badge p-category">{{ page.taxonomies["category"] | first }}</span>
-      {% else %}
-      <span class="badge p-category">Post</span>
+      {% if page.draft %}
+      <span class="badge">Draft</span>
+      <span>&#47;&#47;</span>
       {% endif %}
+      {% set section_name = page.ancestors | last %}
+      {% set section = get_section(path=section_name) %}
+      {% if section.extra.badge_color is defined %}
+      {% set section_style = section.extra.badge_color %}
+      {% else %}
+      {% set section_style = "" %}
+      {% endif %}
+      <a class="badge {{ section_style }} p-category link--reset" href="{{ macros::rel_url(path=section.permalink) }}">{{ section.title }}</a>
       <span>&#47;&#47;</span>
       <time class="dt-published">{{ page.date }}</time>
       <span>&#47;&#47;</span>

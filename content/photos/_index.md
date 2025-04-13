@@ -1,8 +1,6 @@
 +++
-title = "Musings"
+title = "Photos"
 sort_by = "date"
 template = "section.html"
 page_template = "post.html"
-[extra]
-badge_color = "hot"
 +++

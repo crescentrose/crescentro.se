@@ -1,0 +1,174 @@
+@layer layout, typography, utilities;
+
+@layer layout {
+  body {
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-family-primary);
+    font-size: var(--font-size-100);
+    font-synthesis: none;
+  }
+
+  .container {
+    width: min(100vw, var(--content-width));
+    margin: 0 auto;
+    line-height: 1.5;
+    padding: var(--spacing-100);
+  }
+
+  main {
+    margin: 0 auto;
+  }
+}
+
+@layer typography {
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-family-heading);
+    color: var(--color-heading);
+    margin: var(--spacing-100) 0 var(--spacing-50);
+  }
+
+  h1 {
+    font-size: var(--font-size-300);
+    margin: var(--spacing-200) 0 var(--spacing-50);
+    letter-spacing: -2px;
+    line-height: 2;
+  }
+
+  h2 {
+    font-size: var(--font-size-200);
+    letter-spacing: -1px;
+    line-height: 2;
+  }
+
+  h3 {
+    font-size: var(--font-size-150);
+    color: var(--color-heading);
+  }
+
+  h1::before {
+    content: '█';
+    margin-right: var(--spacing-100);
+  }
+
+  h2::before,
+  h3::before,
+  h4::before,
+  h5::before,
+  h6::before {
+    content: '▒';
+    /* enforce pixel perfect font size */
+    font-size: 22px;
+    margin-right: var(--spacing-50);
+  }
+
+  a,
+  a:link {
+    color: var(--color-link);
+    background-image: linear-gradient(to top, var(--color-link-highlight) 50%, transparent 0);
+    background-position: top;
+    background-size: 200% 200%;
+
+    /* spelling this out for Safari */
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--color-link);
+    text-decoration-style: solid;
+    text-decoration-line: underline;
+  }
+
+  a:is(:hover, :visited:hover) {
+    color: var(--color-background);
+    background-position: bottom;
+    text-decoration-color: var(--color-link-highlight);
+    text-decoration-skip-ink: none;
+  }
+
+  a.link--reset:is(:link, :hover, :active, :visited, :visited:hover) {
+    color: inherit;
+    background: inherit;
+    text-decoration-line: none;
+  }
+
+  header {
+    color: var(--color-subtext);
+    margin-bottom: var(--spacing-200);
+  }
+
+  .subheader {
+    display: flex;
+    gap: var(--spacing-100);
+    align-items: center;
+    font-size: var(--font-size-50);
+  }
+
+  .subheader a {
+    text-decoration-thickness: 1px;
+  }
+
+  ul {
+    padding: 0;
+    margin: var(--spacing-50) 0;
+    list-style: none;
+  }
+
+  /* no way to style ::marker, so here we are... */
+  ul li::before {
+    content: "♦";
+    margin-right: var(--spacing-50);
+
+  }
+
+  ul li.featured::before {
+    content: "★";
+  }
+
+  ul li.regular::before {
+    content: "✧";
+  }
+
+  p {
+    margin: var(--spacing-100) 0;
+  }
+}
+
+@layer utilities {
+
+  /* Utilities */
+  .spacer {
+    flex-grow: 1;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+}
+
+@media screen and (min-width: 50em) {
+  .container {
+    padding: var(--spacing-200);
+  }
+
+  .desktop-only {
+    display: block;
+  }
+
+  .mobile-only {
+    display: none;
+  }
+}
+
+/* Selection */
+*::selection {
+  background-color: var(--color-mark);
+  color: var(--color-background);
+}
