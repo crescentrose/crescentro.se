@@ -1,0 +1,22 @@
+{% extends "_base.html" %}
+{% block body %}
+
+<div class="container frontpage">
+  <nav>
+    <div class="brand">
+      <img src="/404@4x.png" class="brand--logo"
+        alt="logo - a dashed outline of a vaguely cat-shaped creature with a question-mark in the middle"
+        srcset="/404@3x.png 60w, /404@4x.png 80w" sizes="(min-width: 50em) 80px, 60px" />
+      <div>
+        <div class="brand--link">404</div>
+        <div class="brand--tagline">the void devours all</div>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <p>Whatever you were looking for is no longer here. Or perhaps never was...</p>
+    <a href="/">Proceed to the home page →</a>
+  </main>
+</div>
+{% endblock %}

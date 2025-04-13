@@ -2,7 +2,7 @@
 base_url = "https://crescentro.se"
 
 # The site title and description; used in feeds by default.
-title = "crescentro.se"
+title = "crescentrose"
 description = "the void meows also"
 
 # Whether to automatically compile all Sass files in the sass directory
@@ -16,6 +16,17 @@ exclude_paginated_pages_in_sitemap = "all"
 
 # The default author for pages
 author = "crescentrose"
+
+# The taxonomies to be rendered for the site and their configuration of the default languages
+# Example:
+#     taxonomies = [
+#       {name = "tags", feed = true}, # each tag will have its own feed
+#       {name = "tags"}, # you can have taxonomies with the same name in multiple languages
+#       {name = "categories", paginate_by = 5},  # 5 items per page for a term
+#       {name = "authors"}, # Basic definition: no feed or pagination
+#     ]
+#
+taxonomies = [{ name = "category", render = false }]
 
 # A list of glob patterns specifying asset files to ignore when the content
 # directory is processed. Defaults to none, which means that all asset files are
@@ -47,7 +58,3 @@ lazy_async_image = true
 
 # Whether footnotes are rendered in the GitHub-style (at the bottom, with back references) or plain (in the place, where they are defined)
 bottom_footnotes = true
-
-[extra]
-# Put all your custom variables here
-title = "crescentro.se"

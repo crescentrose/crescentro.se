@@ -12,8 +12,8 @@
           sizes="(min-width: 50em) 80px, 60px"
         />
       <div>
-        <div class="brand--link">crescentrose</div>
-        <div class="brand--tagline">inventor, innovator, visionary</div>
+        <div class="brand--link">{{ config.title }}</div>
+        <div class="brand--tagline">{{ config.description }}</div>
       </div>
     </div>
   </nav>
@@ -27,7 +27,7 @@
     <section>
       <h2>Recent musings</h2>
       <ul>
-      {% set posts = get_section(path="blog/_index.md") %}
+      {% set posts = get_section(path="posts/_index.md") %}
       {% set recents = posts.pages | slice(end=10) %}
       {% for post in recents %}
         {% if post.extra.featured %}
@@ -40,7 +40,7 @@
       {% endfor %}
       </ul>
 
-      <a href="{{ macros::rel_url(path='@/blog/_index.md') }}">All →</a>
+      <a href="{{ macros::rel_url(path='@/posts/_index.md') }}">All →</a>
     </section>
 
     <section>
@@ -49,10 +49,12 @@
       <p>put links here...</p>
       <p>maybe some cool social embeds</p>
       <ul>
-        <li>github</li>
+        <li><a href="https://github.com/crescentrose" rel="me">@crescentrose on GitHub</a></li>
         <li>rym</li>
         <li>last.fm</li>
         <li>bsky</li>
+        <li>steam</li>
+        <li>discord?</li>
         <li>not sure if i want to add others...</li>
       </ul>
     </section>
@@ -65,6 +67,16 @@
         <li>plants?</li>
         <li>junk?</li>
       </ul>
+    </section>
+
+    <section>
+      <details class="h-card">
+        <summary>Card</summary>
+        <img src="/icon@3x.png" class="u-photo" alt="profile picture - a little silhouette of a black cat" />
+        <a class="u-url p-name" rel="me" href="https://crescentro.se">crescentrose</a>
+        <div class="p-note">chaotic neutral</div>
+        <div><a class="u-email" rel="me" href="mailto:hi@crescentro.se">hi@crescentro.se</a></div>
+      </details>
     </section>
 
   </main>

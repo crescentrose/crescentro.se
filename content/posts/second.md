@@ -1,9 +1,11 @@
 +++
 title = "My second post"
 date = 2025-04-10
+[taxonomies]
+category = ["test"]
 +++
 
-Just trying out some <mark class="primary">syntax highlighting</mark>! <mark class="quiet">(not that I wanted to anyway...)</mark> I think
+Just trying out some <mark>syntax highlighting</mark>! <small>(not that I wanted to anyway...)</small> I think
 
 ## Rust
 

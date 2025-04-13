@@ -61,17 +61,31 @@
 :root {
   color-scheme: light dark;
 
-  --color-surface: light-dark(var(--ctp-latte-mantle), var(--ctp-mocha-mantle));
+  /* Page background */
   --color-background: light-dark(var(--ctp-latte-base), var(--ctp-mocha-base));
-
-  --color-text: light-dark(var(--ctp-latte-subtext1), var(--ctp-mocha-subtext1));
+  /* Backgroun of elements that need to be distinct from the background (e.g., quotes and code blocks */
+  --color-surface: light-dark(var(--ctp-latte-mantle), var(--ctp-mocha-mantle));
+  /* Background of elements that need to be even more distinct from the background
+   * (e.g. highlighted lines in code blocks) */
   --color-highlight: light-dark(var(--ctp-latte-crust), var(--ctp-mocha-crust));
+
+  /* Default text color */
+  --color-text: light-dark(var(--ctp-latte-subtext1), var(--ctp-mocha-subtext1));
+  /* Default heading color. Brighter than default text */
   --color-heading: light-dark(var(--ctp-latte-text), var(--ctp-mocha-text));
+  /* De-emphasized text */
   --color-subtext: light-dark(var(--ctp-latte-subtext0), var(--ctp-mocha-subtext0));
+  /* Even more de-emphasized text. Use sparingly */
   --color-subsubtext: light-dark(var(--ctp-latte-overlay1), var(--ctp-mocha-overlay1));
 
+  /* Link text color */
   --color-link: light-dark(var(--ctp-latte-text), var(--ctp-mocha-text));
+  /* Link text hover background color */
   --color-link-highlight: light-dark(var(--ctp-latte-rosewater), var(--ctp-mocha-rosewater));
+  /* Navigation bar link text color */
   --color-nav-link: light-dark(var(--ctp-latte-text), var(--ctp-mocha-text));
+
+  /* Background color for highlighted text. Multiple variants */
   --color-mark: light-dark(var(--ctp-latte-subtext1), var(--ctp-mocha-subtext1));
+  --color-mark-bright: light-dark(var(--ctp-latte-rosewater), var(--ctp-mocha-rosewater));
 }

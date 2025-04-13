@@ -28,6 +28,7 @@
   --spacing-25: 0.25rem;
   --spacing-50: 0.5rem;
   --spacing-100: 1rem;
+  --spacing-150: 1.5rem;
   --spacing-200: 2rem;
   --spacing-400: 4rem;
 
@@ -55,8 +56,13 @@ main {
   margin: 0 auto;
 }
 
-/* Typography */
+/* Selection */
+*::selection {
+  background-color: var(--color-mark);
+  color: var(--color-background);
+}
 
+/* Typography */
 h1,
 h2,
 h3,
@@ -143,7 +149,6 @@ ul {
   padding: 0;
   margin: var(--spacing-50) 0;
   list-style: none;
-  /* list-style: "♦" inside; */
 }
 
 /* no way to style ::marker, so here we are... */
@@ -159,6 +164,10 @@ ul li.featured::before {
 
 ul li.regular::before {
   content: "✧";
+}
+
+p {
+  margin: var(--spacing-100) 0;
 }
 
 /* Components */
@@ -205,8 +214,12 @@ nav a.brand:is(:link, :hover, :active, :visited, :visited:hover) {
 .badge {
   padding: var(--spacing-25);
   color: var(--color-background);
-  background: var(--color-text);
+  background: var(--color-mark);
   text-transform: uppercase;
+}
+
+.badge.bright {
+  background: var(--color-mark-bright);
 }
 
 /* Code blocks */
@@ -292,19 +305,33 @@ code {
 
 /* Highlights */
 mark {
-  /* reset */
-  background-color: transparent;
-  color: inherit;
+  background-color: var(--color-mark);
+  color: var(--color-background);
 }
 
-mark.primary {
-  background-color: var(--color-mark);
+mark.bright {
+  background-color: var(--color-mark-bright);
   color: var(--color-background);
 }
 
 small {
   color: var(--color-subsubtext);
   font-size: var(--font-size-50);
+}
+
+/* Quotes and admonitions */
+blockquote {
+  padding-left: var(--spacing-150);
+  margin: var(--spacing-100) 0;
+  color: var(--color-subtext);
+  position: relative;
+  background: var(--color-surface);
+}
+
+blockquote p::before {
+  content: ">";
+  position: absolute;
+  left: 0;
 }
 
 /* Utilities */
@@ -319,7 +346,6 @@ small {
 .mobile-only {
   display: block;
 }
-
 
 /* Responsiveness */
 @media screen and (min-width: 50em) {
