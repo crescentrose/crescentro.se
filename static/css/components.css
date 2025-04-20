@@ -251,3 +251,9 @@
     margin: auto 0;
   }
 }
+
+@layer postlist {
+  ul.post-list li {
+    margin-bottom: var(--spacing-50);
+  }
+}

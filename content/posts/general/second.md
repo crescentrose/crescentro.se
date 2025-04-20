@@ -1,8 +1,6 @@
 +++
 title = "My second post"
 date = 2025-04-10
-[taxonomies]
-category = ["test"]
 +++
 
 Just trying out some <mark>syntax highlighting</mark>! <small>(not that I wanted to anyway...)</small> I think

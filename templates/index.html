@@ -24,7 +24,7 @@
     </section>
     <section>
       <h2>Recent musings</h2>
-      <ul>
+      <ul class="post-list">
       {% set posts = get_section(path="posts/_index.md") %}
       {% set recents = posts.pages | slice(end=10) %}
       {% for post in recents %}
@@ -34,7 +34,9 @@
         {% set article_class = "regular" %}
         {% endif %}
 
-        <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a>
+        <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a><br/>
+          {{ post.description }}
+        </li>
       {% endfor %}
       </ul>
 
@@ -44,10 +46,11 @@
     <section>
       <h2>Other stuff</h2>
       <ul>
-        <li><a href="{{ macros::rel_url(path='@/photos/_index.md') }}">Photos →</a></li>
-        <li><a href="{{ macros::rel_url(path='@/cooking/_index.md') }}">Cooking →</a></li>
-        <li><a href="{{ macros::rel_url(path='@/plants/_index.md') }}">Plants →</a></li>
-        <li><a href="{{ macros::rel_url(path='@/junk/_index.md') }}">Junk →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/posts/photos/_index.md') }}">Photos →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/posts/media/_index.md') }}">Music & TV →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/posts/cooking/_index.md') }}">Cooking →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/posts/plants/_index.md') }}">Plants →</a></li>
+        <li><a href="{{ macros::rel_url(path='@/posts/junk/_index.md') }}">Junk →</a></li>
       </ul>
     </section>
 

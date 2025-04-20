@@ -7,7 +7,7 @@
 {% block content %}
 <h1>{{ section.title }}</h1>
 
-<ul>
+<ul class="post-list">
   {% for post in section.pages %}
     {% if post.extra.featured %}
     {% set article_class = "featured" %}
@@ -15,7 +15,9 @@
     {% set article_class = "regular" %}
     {% endif %}
 
-    <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a>
+    <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a><br/>
+      {{ post.description }}
+    </li>
   {% endfor %}
 </ul>
 

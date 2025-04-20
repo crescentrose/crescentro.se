@@ -38,13 +38,13 @@
     font-size: var(--font-size-300);
     margin: var(--spacing-200) 0 var(--spacing-50);
     letter-spacing: -2px;
-    line-height: 2;
+    line-height: 1.5;
   }
 
   h2 {
     font-size: var(--font-size-200);
     letter-spacing: -1px;
-    line-height: 2;
+    line-height: 1.5;
   }
 
   h3 {
@@ -113,15 +113,20 @@
 
   ul {
     padding: 0;
-    margin: var(--spacing-50) 0;
+    margin: var(--spacing-100) 0;
     list-style: none;
   }
 
   /* no way to style ::marker, so here we are... */
+  ul li {
+    position: relative;
+    margin-left: var(--spacing-150);
+  }
+
   ul li::before {
     content: "♦";
-    margin-right: var(--spacing-50);
-
+    position: absolute;
+    left: calc(var(--spacing-150) * -1);
   }
 
   ul li.featured::before {
