@@ -71,9 +71,6 @@
   a,
   a:link {
     color: var(--color-link);
-    background-image: linear-gradient(to top, var(--color-link-highlight) 50%, transparent 0);
-    background-position: top;
-    background-size: 200% 200%;
 
     /* spelling this out for Safari */
     text-decoration-thickness: 3px;
@@ -84,7 +81,7 @@
 
   a:is(:hover, :visited:hover) {
     color: var(--color-background);
-    background-position: bottom;
+    background: var(--color-link-highlight);
     text-decoration-color: var(--color-link-highlight);
     text-decoration-skip-ink: none;
   }

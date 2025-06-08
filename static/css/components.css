@@ -148,6 +148,7 @@
 
   pre code {
     font-family: var(--font-family-code);
+    background: transparent;
     padding: 0;
   }
 
@@ -187,6 +188,11 @@
   code {
     padding: var(--spacing-25) var(--spacing-50);
     background-color: var(--color-surface);
+    font-family: var(--font-family-code);
+  }
+
+  a:is(:visited:hover, :hover) code {
+    background: var(--color-link-highlight);
   }
 }
 
@@ -195,7 +201,7 @@
 
   /* Quotes and admonitions */
   blockquote {
-    padding-left: var(--spacing-150);
+    padding: var(--spacing-50) 0 var(--spacing-50) var(--spacing-150);
     margin: var(--spacing-100) 0;
     color: var(--color-subtext);
     position: relative;
