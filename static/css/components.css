@@ -28,6 +28,10 @@
     gap: var(--spacing-100);
   }
 
+  .brand {
+    font-family: var(--font-family-brand);
+  }
+
   @media screen and (min-width: 50em) {
     nav {
       gap: var(--spacing-200);

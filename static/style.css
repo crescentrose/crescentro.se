@@ -15,11 +15,18 @@
     url("/fonts/DepartureMono-Regular.woff2") format("woff2");
 }
 
+@font-face {
+  font-family: "IBM Plex Mono";
+  src:
+    local("IBM Plex Mono"),
+    url("/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+}
+
 :root {
-  --font-family-primary: "Departure Mono";
+  --font-family-primary: "IBM Plex Mono";
   --font-family-heading: "Departure Mono";
-  /* daring today, aren't we */
-  --font-family-code: "Departure Mono";
+  --font-family-code: "IBM Plex Mono";
+  --font-family-brand: "Departure Mono";
 
   --font-size-base: 16.5px;
   --font-size-50: 11px;
