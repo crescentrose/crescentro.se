@@ -185,9 +185,10 @@
     border-collapse: collapse;
   }
 
+  /* Inline code */
   code {
-    padding: var(--spacing-25) var(--spacing-50);
-    background-color: var(--color-surface);
+    padding: 0 var(--spacing-50);
+    background-color: var(--color-highlight);
     font-family: var(--font-family-code);
   }
 
