@@ -1,7 +1,6 @@
 public/
 
 # auto generated
+.direnv
 static/syntax-theme-dark.css
 static/syntax-theme-light.css
-previews/*
-!previews/.keep
