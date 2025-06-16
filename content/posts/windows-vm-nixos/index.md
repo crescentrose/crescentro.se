@@ -1,8 +1,7 @@
 +++
 title = "The least painful way to set up a Windows VM on NixOS"
 description = "Setting up a Windows VM sounds like one of more straightforward tasks. Unfortunately, Microsoft's recent enshittification made it far more difficult than it needs to be."
-date = 2025-06-17
-draft = true
+date = 2025-06-16
 
 [taxonomies]
 categories = ["nixos", "windows", "virtual machine", "gnome boxes", "qemu", "kvm", "nanoleaf-saga"]
