@@ -12,7 +12,7 @@
   .container {
     width: min(100vw, var(--content-width));
     margin: 0 auto;
-    line-height: 1.5;
+    line-height: 1.6;
     padding: var(--spacing-100);
   }
 
@@ -121,16 +121,19 @@
   }
 
   ul li::before {
+    font-family: var(--font-family-brand);
     content: "♦";
     position: absolute;
     left: calc(var(--spacing-150) * -1);
   }
 
   ul li.featured::before {
+    font-family: var(--font-family-brand);
     content: "★";
   }
 
   ul li.regular::before {
+    font-family: var(--font-family-brand);
     content: "✧";
   }
 

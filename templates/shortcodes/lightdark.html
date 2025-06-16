@@ -1,0 +1,8 @@
+<picture>
+  {% set base = page.colocated_path ~ img | trim_end_matches(pat=".png")%}
+  {% set light = base ~ ".light.png" %}
+  {% set dark = base ~ ".dark.png" %}
+  <source srcset="/{{light}}" media="(prefers-color-scheme: light)" />
+  <source srcset="/{{dark}}" media="(prefers-color-scheme: dark)" />
+  <img src="/{{light}}" alt="{{alt}}" />
+</picture>

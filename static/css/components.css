@@ -5,6 +5,7 @@
 
   details summary::before {
     content: "►";
+    font-family: var(--font-family-brand);
     margin-right: var(--spacing-50);
     display: inline-block;
   }
@@ -61,6 +62,9 @@
 }
 
 @layer badge {
+  .subheader {
+    font-family: var(--font-family-brand);
+  }
 
   /* Post category */
   .badge {
@@ -266,5 +270,67 @@
 @layer postlist {
   ul.post-list li {
     margin-bottom: var(--spacing-50);
+  }
+}
+
+@layer picture {
+  picture {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@layer hr {
+  hr {
+    border-color: var(--color-subtext);
+    width: var(--spacing-200);
+    margin: var(--spacing-100) auto;
+  }
+}
+
+@layer admonition {
+  aside.admonition {
+    background-color: var(--color-surface);
+
+    .admonition--title {
+      font-weight: bold;
+      color: var(--color-heading);
+      padding: var(--spacing-50);
+      background-color: var(--color-highlight);
+    }
+
+    .admonition--body {
+      padding: var(--spacing-50);
+
+
+      p:first-of-type {
+        margin-top: 0;
+      }
+
+      p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@layer footer {
+  footer {
+    margin-top: var(--spacing-400);
+    font-size: var(--font-size-50);
+    font-family: var(--font-family-brand);
+    color: var(--color-subtext);
+
+    a {
+      color: var(--color-subtext);
+      text-decoration-color: var(--color-subtext);
+      text-decoration-thickness: 1px;
+    }
+
+    a:hover,
+    a:visited:hover {
+      background-color: transparent;
+      color: var(--color-heading);
+    }
   }
 }

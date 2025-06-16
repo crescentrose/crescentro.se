@@ -16,16 +16,36 @@
 }
 
 @font-face {
-  font-family: "IBM Plex Mono";
+  font-family: "Iosevka Extended";
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
   src:
-    local("IBM Plex Mono"),
-    url("/fonts/IBMPlexMono-Regular.ttf") format("truetype");
+    url("/fonts/IosevkaSS15-Extended.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Iosevka Extended";
+  font-display: swap;
+  font-weight: 700;
+  font-style: normal;
+  src:
+    url("/fonts/IosevkaSS15-ExtendedBold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Iosevka Extended";
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+  src:
+    url("/fonts/IosevkaSS15-ExtendedItalic.woff2") format("woff2");
 }
 
 :root {
-  --font-family-primary: "IBM Plex Mono";
+  --font-family-primary: "Iosevka Extended";
   --font-family-heading: "Departure Mono";
-  --font-family-code: "IBM Plex Mono";
+  --font-family-code: "Iosevka Extended";
   --font-family-brand: "Departure Mono";
 
   --font-size-base: 16.5px;
@@ -43,7 +63,7 @@
   --spacing-200: 2rem;
   --spacing-400: 4rem;
 
-  --content-width: 50em;
+  --content-width: 60em;
   --card-width: 15em;
   --footnote-border-length: 10em;
 }

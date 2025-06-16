@@ -4,7 +4,7 @@ description = "Exploring obvious and controversial usages of the infamous unsafe
 date = 2025-06-09
 
 [taxonomies]
-categories = ["rust", "programming", "long"]
+categories = ["rust", "programming", "unsafe"]
 
 [extra]
 featured = true
