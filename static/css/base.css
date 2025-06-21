@@ -7,6 +7,8 @@
     font-family: var(--font-family-primary);
     font-size: var(--font-size-100);
     font-synthesis: none;
+    scrollbar-gutter: stable;
+    scrollbar-color: var(--color-mark-bright);
   }
 
   .container {
@@ -139,6 +141,14 @@
 
   p {
     margin: var(--spacing-100) 0;
+  }
+
+  em {
+    color: var(--color-mark-bright);
+  }
+
+  strong {
+    color: var(--color-mark-hot);
   }
 }
 

@@ -89,4 +89,18 @@
   body {
     scroll-behavior: smooth;
   }
+
+  @keyframes color-rotation {
+    from {
+      background-position-x: 0;
+    }
+
+    to {
+      background-position-x: var(--funky-gradient-size);
+    }
+  }
+
+  mark.funky {
+    animation: 1.5s linear infinite color-rotation;
+  }
 }

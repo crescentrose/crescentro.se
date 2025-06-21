@@ -1,8 +1,7 @@
 +++
 title = "Writing a basic Linux device driver when you know nothing about Linux drivers or USB"
-description = "Never wrote a Linux USB device driver? Me neither! Let's go."
-date = 2025-06-26
-draft = true
+description = "How difficult could it really be?"
+date = 2025-06-21
 
 [taxonomies]
 categories = ["rust", "programming", "linux", "usb", "drivers", "nanoleaf-saga"]
@@ -13,13 +12,19 @@ featured = true
 
 A couple of months ago I bought the [Nanoleaf Pegboard Desk Dock](https://nanoleaf.me/en-EU/products/pegboard-desk-dock/?size=1), the latest and greatest in USB-hub-with-RGB-LEDs-and-hooks-for-gadgets technology. This invention unfortunately only supports the *real gamer* operating systems of Windows and macOS, which necessitated the development of a Linux driver.
 
-Over the past few posts I've set up a [Windows VM with USB passthrough](../windows-vm-nixos/), and attempted to [reverse-engineer the official drivers](../wireshark-usb/), only to figure out I could have [just asked the vendor](../figuring-out/) and avoided that entire process.
+---
+
+Over the past few posts I've set up a [Windows VM with USB passthrough](../windows-vm-nixos/), and attempted to [reverse-engineer the official drivers](../wireshark-usb/),  As I was doing that, I also thought I'd message the vendor and ask them if they could share any specifications or docs regarding their protocol. To my surprise, Nanoleaf tech support responded to me within 4 hours, with a full description of the protocol that’s used both by the Desk Dock as well as their RGB strips. The docs mostly confirmed what I had already discovered independently, but there were a couple of other minor features as well (like power and brightness management) that I did not know about, which was helpful.
 
 Today, we're going to take a crack at writing a driver based on the (reverse-engineered) protocol, while also keeping [the official documentation](https://nanoleaf.atlassian.net/wiki/spaces/nlapid/pages/2615574530/Nanoleaf+USB+Lightstrip+Communication+Protocol) at hand. One small problem, though: I've never written a Linux device driver before, nor interacted with any USB device as anything else but a user.
 
----
+{% admonition(title="Skip to the good part?") %}
+Lots of yapping ahead. If you just want to see the code, [click here](#writing-a-basic-driver).
+{% end %}
 
-Whenever you have issues with a USB device, the first thing anyone online will ask you to do is to run `lsusb` to make sure that the kernel can see your device. Let's do that now to see what comes out.
+## Starting from scratch
+
+Most Linux distros ship with [`lsusb`](https://www.man7.org/linux/man-pages/man8/lsusb.8.html), a simple utility that will enumerate all USB devices connected to the system. Since I had no clue where to start from, I figured I might as well run this to see if the device appears in the listing.
 
 ```
 $ lsusb
@@ -27,89 +32,11 @@ $ lsusb
 Bus 001 Device 062: ID 37fa:8201 JW25021301515 Nanoleaf Pegboard Desk Dock
 ```
 
-Hold on a moment. How can the kernel know that what I have plugged in is the Nanoleaf Pegboard Desk Dock? The kernel itself has no knowledge of this device's existence, yet the second I plug it in to my computer it receives power, turns on, gets identified and enumerated with the rest of the devices on my system.
+Well, good news, it's definitely there. But, how can the kernel know that what I have plugged in is the "Nanoleaf Pegboard Desk Dock"? The kernel (presumably) has no knowledge of this device's existence, yet the second I plug it in to my computer it receives power, turns on and gets identified by the kernel.
 
-Well, we actually already have a driver! It's just a very stupid one. If we run `lsusb` in verbose mode and request the information just for this specific device, we will get a lot more details about it:
+As it turns out, we actually already have a driver! It's just a very stupid one. If we run `lsusb` in verbose mode and request the information just for this specific device, we will get a lot more details about it:
 
-<details>
-<summary>Click to expand a big code block</summary>
-
-```
-$ lsusb -d 37fa:8201 -v
-
-Bus 001 Device 091: ID 37fa:8201 JW25021301515 Nanoleaf Pegboard Desk Dock
-Negotiated speed: Full Speed (12Mbps)
-Device Descriptor:
-  bLength                18
-  bDescriptorType         1
-  bcdUSB               1.10
-  bDeviceClass            0 [unknown]
-  bDeviceSubClass         0 [unknown]
-  bDeviceProtocol         0 
-  bMaxPacketSize0        64
-  idVendor           0x37fa JW25021301515
-  idProduct          0x8201 Nanoleaf Pegboard Desk Dock
-  bcdDevice            1.09
-  iManufacturer           1 JW25021301515
-  iProduct                2 Nanoleaf Pegboard Desk Dock
-  iSerial                 3 <snip>
-  bNumConfigurations      1
-  Configuration Descriptor:
-    bLength                 9
-    bDescriptorType         2
-    wTotalLength       0x0029
-    bNumInterfaces          1
-    bConfigurationValue     1
-    iConfiguration          4 Nanoleaf Pegboard Desk Dock
-    bmAttributes         0xa0
-      (Bus Powered)
-      Remote Wakeup
-    MaxPower               70mA
-    Interface Descriptor:
-      bLength                 9
-      bDescriptorType         4
-      bInterfaceNumber        0
-      bAlternateSetting       0
-      bNumEndpoints           2
-      bInterfaceClass         3 Human Interface Device
-      bInterfaceSubClass      0 [unknown]
-      bInterfaceProtocol      0 
-      iInterface              5 Nanoleaf Pegboard Desk Dock
-        HID Device Descriptor:
-          bLength                 9
-          bDescriptorType        33
-          bcdHID               1.00
-          bCountryCode            0 Not supported
-          bNumDescriptors         1
-          bDescriptorType        34 (null)
-          wDescriptorLength      34
-          Report Descriptors: 
-            ** UNAVAILABLE **
-      Endpoint Descriptor:
-        bLength                 7
-        bDescriptorType         5
-        bEndpointAddress     0x82  EP 2 IN
-        bmAttributes            3
-          Transfer Type            Interrupt
-          Synch Type               None
-          Usage Type               Data
-        wMaxPacketSize     0x0040  1x 64 bytes
-        bInterval               1
-      Endpoint Descriptor:
-        bLength                 7
-        bDescriptorType         5
-        bEndpointAddress     0x02  EP 2 OUT
-        bmAttributes            3
-          Transfer Type            Interrupt
-          Synch Type               None
-          Usage Type               Data
-        wMaxPacketSize     0x0040  1x 64 bytes
-        bInterval               1
-Device Status:     0x0000
-  (Bus Powered)
-```
-
-</details>
+{{ longcode(file = "./listing-1") }}
 
 This is a *lot* of information, so we need to take a quick USB class.
 
@@ -117,25 +44,25 @@ This is a *lot* of information, so we need to take a quick USB class.
 
 The USB spec is long, complicated and mainly aimed at low-level implementations (think kernel developers, device vendors, and so on). You can, of course, still read it if you enjoy being bored. But, thankfully, a kind soul collected the good parts into [USB in a NutShell](https://www.beyondlogic.org/usbnutshell/usb1.shtml).
 
-To summarize the summary, a USB device can have multiple *configurations*, which usually explain the power requirements for the device. Most devices will have just one.
+To summarize the summary, a USB device can have multiple **configurations**, which usually explain the power requirements for the device. Most devices will have just one.
 
-Each of those configurations can have multiple *interfaces*. So for example, your DSLR might serve as a file storage device as well as a webcam.
+Each of those configurations can have multiple **interfaces**. So for example, a camera might serve as a file storage device as well as a webcam.
 
-Finally, each interface can have multiple endpoints, whcih describe how the data is transferred - so perhaps your camera has an "isochronous" (continuous) transfer for a webcam feed, and a "bulk" transfer for moving image files over.
+Finally, each interface can have multiple **endpoints**, whcih describe how the data is transferred. Perhaps the camera has an "isochronous" (continuous) transfer for a webcam feed, and a "bulk" transfer for moving image files over.
 
-Going back to our device, we can see that it exposes one interface, which is a *Human Interface Device*. HIDs are a class of USB devices that covers things like keyboards, mice or gamepads. The kernel contains a generic driver for USB HIDs - [here it is](https://github.com/torvalds/linux/blob/master/drivers/hid/usbhid/hid-core.c) in all of its C glory. The kernel even supports [emulating HIDs](https://docs.kernel.org/usb/gadget_hid.html), so you could theoretically run the Linux kernel on a chip in your keyboard and use it as device firmware for your keyboard. I'm not saying you _should_ do this, just that you _could_.
+Going back to our device, we can see that it exposes one interface, which is a *Human Interface Device*. HIDs are a class of USB devices that covers things like keyboards, mice or gamepads, and each of those categories is a separate *sub-class*. The kernel contains a generic driver for USB HIDs - [here it is](https://github.com/torvalds/linux/blob/master/drivers/hid/usbhid/hid-core.c) in all of its C glory.
 
-Because the HID specification covers many device types, as well as a standard method of communication for those devices, the kernel developers do not need to write specific drivers for each individual keyboard and mouse on the market. Rather, the device maker will use the existing standard to communicate with the system. 
+This is why the kernel developers do not need to write specific drivers for each individual keyboard and mouse on the market. Vendors will label their device with one of the well-known HID sub-classes, then use a common protocol to implement the functionality.
 
-{% admonition(title="Hot nerd's cool tip") %}
+{% admonition(title="Trivia you can use to woo potential partners") %}
 Here's [443 pages on generic HID implementations](https://usb.org/document-library/hid-usage-tables-16). Did you know that a USB keyboard minimally consists of *at least* 103 buttons according to the USB-IF, and everything else is a *keypad*? I promise I won't tell r/MechanicalKeyboards if you don't.
 {% end %}
 
-Unfortunately there's no HID specification for an RGB LED... thing (well, there's an "LED" specification, but it's mainly for things like status LEDs, not color LEDs) so our device is just a plain old generic HID with an interface sub-class of `0`. This means that the kernel recognizes it and powers it correctly, but it doesn't really know what to do with it, so it just lets it sit there. 
+Unfortunately there's no HID specification for an RGB LED... thing (well, there's an "LED" specification, but it's mainly for things like status LEDs, not color LEDs) so our device is just a plain old generic HID with an interface sub-class of `0`. This means that the kernel recognizes it and powers it correctly, but it doesn't really know what to do with it, so it just lets it sit there.
 
 There are two options that we have at this point:
 
-1. We could write a kernel driver that follows the [kernel standard](https://docs.kernel.org/leds/leds-class.html) and exposes each individual LED as 3 devices (one per color) under `/sys/class/leds`. Interacting with the kernel devs sounds scary (yes I realize I'm a grown-ass adult man), but even if it wasn't, I question the utility of trying to merge drivers for a very niche product into the kernel. 
+1. We could write a kernel driver that follows the [kernel standard](https://docs.kernel.org/leds/leds-class.html) and exposes each individual LED as 3 devices (one per color) under `/sys/class/leds`. Interacting with the kernel devs sounds scary (yes I realize I'm a grown-ass adult man), but even if it wasn't, I question the utility of trying to merge drivers for a very niche product into the kernel. Also, `/sys/class/leds` feels like it's intended for status LEDs and not <mark class="funky">gamer colors</mark> anyway.
 2. We could write a userspace driver through [libusb](https://github.com/libusb/libusb), thus defining our own way of controlling LEDs and reducing the quality bar from "Linus Torvalds might send you a strongly worded letter if you fuck up" to "fuck it, we ball".
 
 Given that I have no idea what I am doing, I'm gonna go for option 2, but if one of you brave souls goes for option 1, please let me know and I will print out a photo of you and frame it on my wall.
@@ -152,8 +79,7 @@ ACTION=="add", SUBSYSTEM=="usb", DRIVERS=="usb", ATTRS{idVendor}=="37fa", ATTRS{
 
 where `ATTRS{idVendor}` and `ATTRS{idProduct}` are the vendor and product IDs you got from `lsusb`, and `TAG+="uaccess"` is the spell that grants the currently active user permissions to manage the device. Then, unplug your device and plug it back in.
 
-<details>
-<summary>Keep reading if you're using NixOS, and feel free to skip if you go outside sometimes.</summary>
+{% details(title="Keep reading if you're using NixOS, and feel free to skip if you go outside sometimes.") %}
 
 You can name the `.rules` file whatever you want, but, obviously, it [needs to come before `73` alphabetically](https://github.com/systemd/systemd/issues/4288#issuecomment-348166161). This is because fuck you, that's why. This poses an interesting challenge on NixOS, which, in its eternal wisdom, [provide only one way of adding custom rules, which writes to `99-local.rules`](https://nixos.org/manual/nixos/stable/options#opt-services.udev.extraRules). The solution to that is to make a custom package that defines the rule at the desired location, and then extend `services.udev.packages` with your new package. Thankfully, this is easily doable with the `pkgs.writeTextFile` helper, like so:
 
@@ -168,8 +94,7 @@ services.udev.packages = [
     })
   ];
 ```
-
-</details>
+{% end %}
 
 ## Writing a basic driver
 
@@ -227,7 +152,7 @@ DeviceDescriptor {
 
 ## The joy of debugging
 
-The next thing we need to do is to write to the device somehow. For that, we first need to claim an interface. Recall that interfaces are essentially capabilities of the device, and through `lsusb` we learned that we only have one interface with the ID (`bInterfaceNumber`) of `0`. Thankfully, there's an obvious `claim_interface` method on a `Device`.
+Now that we have access to the device, we want to write a simple payload to it. For that, we first need to claim an interface. Recall that interfaces are essentially capabilities of the device, and through `lsusb` we learned that we only have one interface with the ID (`bInterfaceNumber`) of `0`. Thankfully, there's an obvious `claim_interface` method on a `Device`.
 
 ```rust
 // ...
@@ -243,7 +168,7 @@ fn main() {
 
 ```
 $ cargo run
-   Compiling gamer-driver v0.1.0 (/home/ivan/Code/pegboard-usb-demo)
+   Compiling gamer-driver v0.1.0 (/home/ivan/Code/gamer-driver)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.21s
      Running `target/debug/gamer-driver`
 
@@ -256,7 +181,9 @@ Ah.
 
 So, what you just experienced is the joy of `libusb` error messages. This message, at 4 characters, is in fact pretty generous - you might be greeted with a message that only says `Io`, and good luck debugging that. In general, `Busy` means that something is already holding the device open, so you cannot do anything with it. However, you won't actually be told what is holding it open.
 
-The secret is that the device is, of course, being held open by the kernel. This is the generic driver I talked about earlier. And the secret solution is to release the kernel driver, if it is currently active on the device. This requires you to have write access to the device, so if you did not do the `udev` song and dance, prepare to prefix all future invocations of your driver with `sudo`.
+The secret is that the device is, of course, being held open by the kernel. This is the generic driver I talked about earlier. And the secret solution is to release the kernel driver, if it is currently active on the device.
+
+This requires you to have write access to the device, so if you did not do the `udev` song and dance from earlier in this article, prepare to prefix all future invocations of your driver with `sudo`.
 
 ```rust
 fn main() {
@@ -305,6 +232,15 @@ In USB parlance, `IN` is always something that the device sends to the host, and
 
 For testing purposes, I want to make the pegboard show a solid red color. According to my earlier investigation, this means that I need to send `02 00 c0`, followed by 64 repeats of `0f ff 0f`, to an endpoint at `0x02`. In addition, `rusb` only exposes the blocking API of `libusb`, so we will also need to define a timeout after which `libusb` will give up and error out.
 
+{% admonition(title="Don't mess up your stuff") %}
+Presumably, if you are reading this, you are already aware that writing random data in patterns you
+divined from inspecting packets is not exactly the safest thing in the world. But it bears repeating
+that following along may **permanently damage your devices** or, worse, yourself if you're
+interacting with something that can move in the real world. Remember to only experiment on things
+you can afford to replace (both hardware and fleshware), and always remember **I warned you, don't
+blame me.**
+{% end %}
+
 ```rust
 use std::time::Duration;
 
@@ -335,7 +271,7 @@ fn main() {
 
 ```
 $ cargo run
-   Compiling gamer-driver v0.1.0 (/home/ivan/Code/pegboard-usb-demo)
+   Compiling gamer-driver v0.1.0 (/home/ivan/Code/gamer-driver)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.24s
      Running `target/debug/gamer-driver`
 ```
@@ -416,7 +352,7 @@ fn main() {
 
 ```
 $ cargo run
-   Compiling gamer-driver v0.1.0 (/home/ivan/Code/pegboard-usb-demo)
+   Compiling gamer-driver v0.1.0 (/home/ivan/Code/gamer-driver)
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.23s
      Running `target/debug/gamer-driver`
 Interrupt: 130
@@ -425,6 +361,6 @@ Interrupt: 130
 
 This... works! Of course, we send no more color frames to the device, so we won't get any more interrupts, but we now have two threads, one which we can use to change the colors shown, and another which we can use to read the interrupts.
 
-There are some quirks with this device: it seems to require a steady stream of color frames, otherwise it reverts to "offline mode" as it does not receive any new frames from the host, and the first frame's brightness is significantly lower than the brightness of future frames. Not to mention that, despite what the official protocol documentation would have you believe, the colors seem to be in GRB instead of RGB format, and if you make the device _too bright_, it will just hard-reset after a couple of seconds. That is, I suppose, a part of the joy of working with _weird tech_. 
+There are some quirks with this device: it seems to require a steady stream of color frames, otherwise it reverts to "offline mode" as it does not receive any new frames from the host, and the first frame's brightness is significantly lower than the brightness of future frames. Not to mention that, despite what the official protocol documentation would have you believe, the colors seem to be in GRB instead of RGB format, and if you make the device _too bright_, it will just hard-reset after a couple of seconds. That is, I suppose, a part of the joy of coding.
 
 But this small proof of concept shows that writing simple device drivers is not all that hard, and that 50 lines of code can bring you quite far. Over the next few weeks I hope to polish up my proof of concept, make a small GUI for it, pack it up and share it with the two other Linux users who own this dumb thing. And I'm happy to have learned the basics of reverse-engineering a simple USB device driver, and using that as a foundation for writing my own. Even if I could have just asked for the spec earlier and not fussed with it.
