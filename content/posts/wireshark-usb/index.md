@@ -1,8 +1,7 @@
 +++
 title = "Using Wireshark to reverse-engineer a USB device"
 description = "To develop our own drivers for a USB device, we must first learn how it actually works. Luckily, Wireshark can help out here."
-date = 2025-06-18
-draft = true
+date = 2025-06-19
 
 [taxonomies]
 categories = ["wireshark", "windows", "usb", "linux", "nanoleaf-saga"]
@@ -16,7 +15,7 @@ Previously, I [set up a Windows VM](../windows-vm-nixos/) for the purposes of re
 
 The first thing we want to do is to set up the official drivers on the VM and just confirm that the USB passthrough works. In my case, this included setting up the Nanoleaf app, passing through the actual device through Boxes settings, setting up the device within the app, and making sure I can change the colors and set up custom scenes on the device.
 
-The next step is to see what is the app actually doing when it instructs the device to change colors. Searching for "monitor USB traffic" will give you a bunch of results, some of which look a bit suspicious. After a couple of minutes of looking around, I discovered that the venerable [Wireshark has support for USB capture](https://wiki.wireshark.org/CaptureSetup/USB). 
+The next step is to see what is the app actually doing when it instructs the device to change colors. Searching for "monitor USB traffic" will give you a bunch of results, some of which look a bit suspicious. After a couple of minutes of looking around, I discovered that the venerable [Wireshark has support for USB capture](https://wiki.wireshark.org/CaptureSetup/USB).
 
 There are two options for installing Wireshark:
 
