@@ -194,7 +194,7 @@ fn main() {
     {
         device
             .detach_kernel_driver(INTERFACE)
-            .expect("cannot detacth kernel driver");
+            .expect("cannot detach kernel driver");
     }
 
     device
