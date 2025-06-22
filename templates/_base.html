@@ -17,7 +17,8 @@
     <link rel="icon" href="/favicon.ico" sizes="16x16">
     <link rel="icon" href="/icon.svg" type="image/svg+xml">
 
-    <link rel="alternate" type="application/atom+xml" title="crescentro.se - all posts (Atom)" href="{{ get_url(path="posts/atom.xml") }}" />
+    <link rel="alternate" type="application/atom+xml" title="crescentro.se - all posts (Atom)" href="{{ get_url(path="posts/atom.xml", trailing_slash=false) }}" />
+    <link rel="alternate" type="application/rss+xml" title="crescentro.se - all posts (RSS)" href="{{ get_url(path="posts/rss.xml", trailing_slash=false) }}" />
 
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#eff1f5" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1e1e2e" />

@@ -12,6 +12,8 @@ compile_sass = false
 # Generate feed per category
 generate_feeds = false
 
+feed_filenames = ["atom.xml", "rss.xml"]
+
 # When set to "all", paginated pages are not a part of the sitemap, default is "none"
 exclude_paginated_pages_in_sitemap = "all"
 
