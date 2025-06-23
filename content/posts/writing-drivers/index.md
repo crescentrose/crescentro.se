@@ -100,7 +100,7 @@ services.udev.packages = [
 
 Okay, enough yapping. Let's start with a basic Rust binary and immediately add the [`rusb`](https://crates.io/crates/rusb) crate, which will serve as a binding to `libusb`.
 
-```shell
+```bash
 cargo new gamer-driver
 cd gamer-driver
 cargo add rusb

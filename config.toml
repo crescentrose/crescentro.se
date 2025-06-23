@@ -61,3 +61,6 @@ lazy_async_image = true
 
 # Whether footnotes are rendered in the GitHub-style (at the bottom, with back references) or plain (in the place, where they are defined)
 bottom_footnotes = true
+
+[extra]
+rss_author = "hi@crescentro.se (crescentrose)"
