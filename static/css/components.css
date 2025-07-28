@@ -80,8 +80,8 @@
   .footnotes {
     margin: var(--spacing-200) 0;
     padding: var(--spacing-50) 0;
-    color: var(--color-subtext);
-    font-size: var(--font-size-50);
+    color: var(--color-subsubtext);
+    font-size: var(--font-size-100);
     position: relative;
   }
 
@@ -100,7 +100,12 @@
     margin: var(--spacing-50) 0;
   }
 
-  .footnotes a,
+  .footnotes a {
+    text-decoration-thickness: 1px;
+    font-size: var(--font-size-100);
+  }
+
+
   .footnote-reference a {
     text-decoration-thickness: 1px;
     font-size: var(--font-size-50);
@@ -362,5 +367,37 @@
       background-color: transparent;
       color: var(--color-heading);
     }
+  }
+}
+
+@layer table {
+  table {
+    text-align: left;
+    border-collapse: collapse;
+  }
+
+  th,
+  caption {
+    text-align: start;
+  }
+
+  tr,
+  th,
+  td {
+    padding: var(--spacing-100);
+    border: 3px solid var(--color-background);
+  }
+
+  thead,
+  tfoot {
+    background-color: var(--color-highlight);
+  }
+
+  tbody {
+    background-color: var(--color-surface);
+  }
+
+  td {
+    max-width: 40em;
   }
 }
