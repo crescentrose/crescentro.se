@@ -1,0 +1,7 @@
+<div
+  class="speech-bubble {% if response %}second-person{% else %}first-person{% endif %} {% if doubletext %}double-text{% endif %}">
+  <img class="avatar" src="{{ avatar_url }}" alt="{{ avatar_alt }}">
+  <div class="message">
+    {{ body }}
+  </div>
+</div>

@@ -401,3 +401,49 @@
     max-width: 40em;
   }
 }
+
+@layer speechbubble {
+  .speech-bubble {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: var(--spacing-100);
+    margin-bottom: var(--spacing-50);
+  }
+
+  .speech-bubble.second-person {
+    flex-direction: row;
+  }
+
+  .speech-bubble img.avatar {
+    border: 1px solid var(--color-mark);
+    border-radius: 100%;
+    align-self: center;
+    height: 32px;
+    width: 32px;
+  }
+
+  .speech-bubble.double-text img.avatar {
+    visibility: hidden;
+  }
+
+  .speech-bubble .message {
+    background-color: var(--color-highlight);
+    padding: var(--spacing-50);
+  }
+
+  .speech-bubble.first-person .message {
+    border-radius: 1em 1em 0 1em;
+  }
+
+  .speech-bubble.second-person .message {
+    border-radius: 1em 1em 1em 0;
+  }
+
+  .speech-bubble.second-person.double-text .message {
+    border-radius: 0 1em 1em 1em;
+  }
+
+  .speech-bubble.first-person.double-text .message {
+    border-radius: 1em 0 1em 1em;
+  }
+}
