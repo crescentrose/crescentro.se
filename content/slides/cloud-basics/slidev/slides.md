@@ -10,8 +10,8 @@ duration: 20min
 fonts:
   provider: none
   serif: Departure Mono
-  sans: Iosevka
-  mono: Iosevka
+  sans: Iosevka Extended
+  mono: Iosevka Extended
 ---
 
 # Introduction to modern cloud infrastructure

@@ -1,3 +1,48 @@
+@font-face {
+  font-family: "Departure Mono";
+  src:
+    local("Departure Mono"),
+    local("DepartureMono-Regular"),
+    url("/fonts/DepartureMono-Regular.otf") format("opentype"),
+    url("/fonts/DepartureMono-Regular.woff") format("woff"),
+    url("/fonts/DepartureMono-Regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Iosevka Extended";
+  font-display: swap;
+  font-weight: 400;
+  font-style: normal;
+  src:
+    local("Iosevka Extended"),
+    url("/fonts/IosevkaSS15-Extended.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Iosevka Extended";
+  font-display: swap;
+  font-weight: 500 700;
+  font-style: normal;
+  src:
+    local("Iosevka Bold Extended"),
+    local("Iosevka Extended Bold"),
+    local("Iosevka-ExtendedBold"),
+    url("/fonts/IosevkaSS15-ExtendedBold.woff2") format("woff2"),
+    local("Iosevka Extended");
+}
+
+@font-face {
+  font-family: "Iosevka Extended";
+  font-display: swap;
+  font-weight: 400;
+  font-style: italic;
+  src:
+    local("Iosevka Extended Italic"),
+    local("Iosevka-ExtendedItalic"),
+    url("/fonts/IosevkaSS15-ExtendedItalic.woff2") format("woff2"),
+    local("Iosevka Extended");
+}
+
 :root {
   --c-base-light: #eff1f5;
   --c-base-dark: #1e1e2e;
