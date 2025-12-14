@@ -36,7 +36,7 @@ taxonomies = [{ name = "categories", render = false }]
 # copied over to the `public` directory.
 # Example:
 #     ignored_content = ["*.{graphml,xlsx}", "temp.*", "**/build_folder"]
-ignored_content = []
+ignored_content = ["**/slidev/**"]
 
 [markdown]
 # Whether to do syntax highlighting

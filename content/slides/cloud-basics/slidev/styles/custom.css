@@ -1,0 +1,78 @@
+:root {
+  --c-base-light: #eff1f5;
+  --c-base-dark: #1e1e2e;
+  --c-highlight-light: #e64553;
+  --c-highlight-dark: #eba0ac;
+  --c-heading-light: #4c4f69;
+  --c-heading-dark: #cdd6f4;
+  --c-text-light: #5c5f77;
+  --c-text-dark: #bac2de;
+  --c-surface-light: #ccd0da;
+  --c-surface-dark: #313244;
+
+  --c-highlight: light-dark(var(--c-highlight-light), var(--c-highlight-dark));
+  --c-base: light-dark(var(--c-base-light), var(--c-base-dark));
+  --c-heading: light-dark(var(--c-heading-light), var(--c-heading-dark));
+  --c-text: light-dark(var(--c-text-light), var(--c-text-dark));
+  --c-surface: light-dark(var(--c-surface-light), var(--c-surface-dark));
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  @apply font-serif;
+  color: var(--c-heading);
+}
+
+h2::before {
+  content: '▒';
+  /* enforce pixel perfect font size */
+  font-size: 22px;
+  margin-right: 0.5em;
+  vertical-align: top;
+}
+
+h3::before {
+  content: '░';
+  font-size: 16.5px;
+  margin-right: 0.5em;
+  vertical-align: top;
+}
+
+strong {
+  color: var(--c-highlight);
+}
+
+em {
+  color: var(--c-highlight);
+}
+
+.slidev-page {
+  background-color: var(--c-base);
+  color: var(--c-text);
+
+  blockquote,
+  pre {
+    background-color: var(--c-surface);
+  }
+
+  blockquote {
+    border-color: var(--c-highlight);
+  }
+
+  h2 {
+    @apply mb-4;
+  }
+
+  h3 {
+    @apply mb-1;
+  }
+}
+
+/* we have to be more specific than the built-in style here */
+.slidev-page>.slidev-layout :not(pre)>code {
+  background: var(--c-surface);
+}

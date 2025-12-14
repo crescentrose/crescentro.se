@@ -1,0 +1,17 @@
+{
+  "name": "intro-to-cloud-infrastructure",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^52.11.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "@ktym4a/slidev-theme-ktym4a": "^0.3.2",
+    "vue": "^3.5.25"
+  }
+}

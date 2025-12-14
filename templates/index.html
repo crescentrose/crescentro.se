@@ -4,13 +4,8 @@
 <div class="container frontpage">
   <nav>
     <div class="brand">
-      <img
-          src="/icon@4x.png"
-          class="brand--logo"
-          alt="logo - a little silhouette of a black cat"
-          srcset="/icon@3x.png 60w, /icon@4x.png 80w"
-          sizes="(min-width: 50em) 80px, 60px"
-        />
+      <img src="/icon@4x.png" class="brand--logo" alt="logo - a little silhouette of a black cat"
+        srcset="/icon@3x.png 60w, /icon@4x.png 80w" sizes="(min-width: 50em) 80px, 60px" />
       <div>
         <div class="brand--link">{{ config.title }}</div>
         <div class="brand--tagline">{{ config.description }}</div>
@@ -21,29 +16,28 @@
   <main>
     <section>
       <p>I write code sometimes.</p>
-      <p>This place is currently a heavy WIP, but I've been sitting on it for months in my quest for
-      perfection and I need to learn to let things go, so you're currently seeing a rough draft that
-      lacks a lot of polish and past content.</p>
+      <p>
+        <a href="{{ macros::rel_url(path='@/posts/_index.md') }}">Posts →</a><br>
+        <a href="{{ macros::rel_url(path='@/slides/_index.md') }}">Slides →</a>
+      </p>
     </section>
     <section>
       <h2>Recent musings</h2>
       <ul class="post-list">
-      {% set posts = get_section(path="posts/_index.md") %}
-      {% set recents = posts.pages | slice(end=10) %}
-      {% for post in recents %}
+        {% set posts = get_section(path="posts/_index.md") %}
+        {% set recents = posts.pages | slice(end=10) %}
+        {% for post in recents %}
         {% if post.extra.featured %}
         {% set article_class = "featured" %}
         {% else %}
         {% set article_class = "regular" %}
         {% endif %}
 
-        <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a><br/>
+        <li class="{{ article_class }}"><a href="{{ post.path | safe }}">{{ post.title }}</a><br />
           {{ post.description }}
         </li>
-      {% endfor %}
+        {% endfor %}
       </ul>
-
-      <a href="{{ macros::rel_url(path='@/posts/_index.md') }}">All →</a>
     </section>
 
     <section>
@@ -62,7 +56,7 @@
       <p>
         Too many things demand your attention these days so there's no newsletter to subscribe
         to. Instead, consider adding my
-        <a href="{{ get_url(path="posts/rss.xml", trailing_slash=false) }}">RSS feed</a> to your
+        <a href="{{ get_url(path='posts/rss.xml', trailing_slash=false) }}">RSS feed</a> to your
         reader.
       </p>
       <p>
