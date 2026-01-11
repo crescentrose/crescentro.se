@@ -1,5 +1,5 @@
 +++
-title = "Stop aruging each other over LLMs, you stupid fucks"
+title = "Stop arguing each other over LLMs, you stupid fucks"
 description = "Your fellow man is not your enemy."
 date = 2026-01-10
 
