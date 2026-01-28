@@ -130,4 +130,6 @@ If you're just looking to play a few tracks now and then, I don't know why you'v
 
 Honestly, I'm really happy with this. I started looking into this feeling a bit desperate, but there's actually a vibrant ecosystem of native Linux apps out there, with people building things they care about, and even if all the features aren't all the way there yet, it's much better than it was. I hope these trends continue!
 
+_Update: After reading through many comments, a lot of people mentioned their affinity for foobar2000-style players, and [fooyin](https://fooyin.org/) came up as the most frequent suggestion. I haven't tested it, but it seems to be very popular. If you want even more options, fooyin comes highly recommended by a lot of people._
+
 [^1]: I used `nixpkgs` as it's the largest repository of Linux software that exists and because I can `nix run nixpkgs#<app>` without setting it up and cleaning up afterwards. I'm sure your favorite packaging system is superior, and I do not need to be told that.
