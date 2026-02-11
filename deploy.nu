@@ -2,4 +2,4 @@
 
 ./build.nu
 
-wrangler deploy
+pnpx wispctl deploy crescentro.se --path ./public --site crescentrose

@@ -19,7 +19,6 @@
             pkgs.nodePackages.typescript-language-server
             pkgs.nodejs_24
             pkgs.zola
-            pkgs.wrangler
           ];
         };
       }
