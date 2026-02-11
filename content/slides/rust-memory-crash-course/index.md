@@ -8,6 +8,8 @@ categories = ["rust", "borrows"]
 
 +++
 
+# Basic memory model
+
 ## What's a computer?
 
 Core parts of a computer:
@@ -105,6 +107,7 @@ If you load the number 2026 to memory, it might be loaded at an address like `0x
 (On most modern CPUs, addresses will be much longer: 64 bits or 16 hexadecimal digits, e.g. `0x0123456789ABCDEF`).
 
 ---
+
 ## Variables
 
 Using raw addresses every time would be quite inconvenient: they're not descriptive, you'd almost certainly overlap with another program, or you might even try to access memory that does not exist.
@@ -148,6 +151,9 @@ let my_age = 31;
 In the above example, both 30 and 31 exist in memory. Sadly, 30 is unreachable as you have no name for it anymore. (This is a subtle Rust-specific feature.)
 
 ---
+
+# References
+
 ## Passing values to functions
 
 When building programs you usually write lots of functions, or at least call them. Those functions usually take values or references.
@@ -379,6 +385,9 @@ Undefined behavior means the compiler is allowed to do **literally anything**: c
 If you suggest to certain people we should try to avoid issues like this, you will commonly get a smug response along the lines of "well personally I would simply have coded it better". This likewise provokes undefined behavior from Rust developers.
 
 ---
+
+# Dealing with lifetimes
+
 ## Lifetimes
 
 Rust has a _borrow checker_ which enforces something called _lifetimes_. A borrow has a _lifetime_ beyond which it is invalid. The compiler will prevent you from using a reference to something that may not still exist.
@@ -472,7 +481,11 @@ Lifetimes are often seen as the "final boss" of Rust and many people find it har
 
 Lifetimes exist in all languages, but Rust is one of the very few ones that exposes them and makes them a first-class citizen of the language.
 
+
 ---
+
+# Allocating memory and smart pointers
+
 ## Stack and heap
 
 So far we've considered memory as one big happy bucket of things. This is only partly accurate.
