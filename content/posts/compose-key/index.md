@@ -1,7 +1,7 @@
 +++
 title = "The Compose key is magic"
 description = "Fast emoji and special character input on your Linux desktop? For free? In THIS economy?"
-date = 2026-03-13
+date = 2026-03-13T21:24:00Z
 
 [taxonomies]
 categories = ["linux", "desktop", "briefs", "unicode"]
